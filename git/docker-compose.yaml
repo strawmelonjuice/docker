@@ -1,0 +1,102 @@
+networks:
+  proxy:
+    external: true
+  forgejo:
+
+services:
+# git setup ----------------------------------------------------------
+  git:
+    image: codeberg.org/forgejo/forgejo:12
+    command: >-
+      bash -c '
+      /usr/bin/s6-svscan /etc/s6 &
+      sleep 10 ;
+      su -c "forgejo forgejo-cli actions register --secret ${SHARED_SECRET}" git ;
+      su -c "forgejo admin user create --admin --username strawmelonjuice --password ${ROOT_PASSWORD} --email mar@strawmelonjuice.com" git ;
+      sleep infinity
+      '
+    restart: unless-stopped
+    container_name: git
+    environment:
+      - FORGEJO__database__DB_TYPE=postgres
+      - FORGEJO__database__HOST=db:5432
+      - FORGEJO__database__NAME=forgejo
+      - FORGEJO__database__USER=forgejo
+      - FORGEJO__database__PASSWD=forgejo
+      - FORGEJO__DEFAULT__APP_NAME="StrawmelonCODE"
+      - FORGEJO__DEFAULT__APP_SLOGAN="Strawmelonjuice's git server"
+      - FORGEJO__server__ROOT_URL=https://git.strawmelonjuice.com
+      - FORGEJO__server__OFFLINE_MODE=false
+      - FORGEJO__mirror__ENABLED=true
+    networks:
+      - forgejo
+    ports:
+      - "222:22"
+      - "3000:3000"
+    volumes:
+      - ./data/forgejo:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=forgejo
+      - POSTGRES_PASSWORD=forgejo
+      - POSTGRES_DB=forgejo
+    networks:
+      - forgejo
+    volumes:
+      - ./data/forgejo_postgres:/var/lib/postgresql/data
+
+
+# dind setup --------------------------------------------------------
+
+  docker-in-docker:
+    image: code.forgejo.org/oci/docker:dind
+    hostname: docker
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+      DOCKER_HOST: docker-in-docker
+    networks:
+      - forgejo
+    volumes:
+      - ./data/docker_certs:/certs
+
+# runner setup --------------------------------------------------------
+
+  runner-daemon:
+    image: code.forgejo.org/forgejo/runner:7.0.0
+    links:
+      - docker-in-docker
+      - git
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: "1"
+    networks:
+      - forgejo
+    volumes:
+      - ./data/runner-data:/data
+      - ./data/docker_certs:/certs
+    command: >-
+      bash -ec '
+      while : ; do
+        forgejo-runner create-runner-file --connect --instance http://git:3000 --name runner --secret ${SHARED_SECRET} && break ;
+        sleep 1 ;
+      done ;
+      sed -i -e "s|\"labels\": null|\"labels\": [\"docker-cli:docker://code.forgejo.org/oci/docker:cli\",\"node-bookworm:docker://code.forgejo.org/oci/node:20-bookworm\"]|" .runner ;
+      forgejo-runner generate-config > config.yml ;
+      sed -i -e "s|  level: info|  level: debug|" config.yml ;
+      sed -i -e "s|network: .*|network: host|" config.yml ;
+      sed -i -e "s|^  envs:$$|  envs:\n  DOCKER_HOST: tcp://docker:2376\n  DOCKER_TLS_VERIFY: 1\n  DOCKER_CERT_PATH: /certs/client|" config.yml ;
+      sed -i -e "s|^  options:|  options: -v /certs/client:/certs/client|" config.yml ;
+      sed -i -e "s|  valid_volumes: \[\]$$|  valid_volumes:\n    - /certs/client|" config.yml ;
+      chown -R 1000:1000 /data ;
+
+      while : ; do test -w .runner && forgejo-runner --config config.yml daemon ; sleep 1 ; done
+      '

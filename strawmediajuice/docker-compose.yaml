@@ -1,0 +1,12 @@
+services:
+  strawmedia:
+    image: strawmelonjuice/strawmediajuice:1.1.1
+    restart: unless-stopped
+    environment:
+      - INIT_USERNAME=mar
+      - INIT_PASSWORD=6ztqTnNIrWV8zO
+      - PORT=3022
+    ports:
+      - "3022:3022"
+    volumes:
+      - ./data/:/app/data/
