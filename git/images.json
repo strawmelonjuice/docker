@@ -12,6 +12,10 @@
       "label": "fedora-42",
       "image": "docker://fedora:42"
     },
+     {
+      "label": "fedora-latest",
+      "image": "docker://fedora:42"
+    },
     {
       "label": "docker-cli",
       "image": "docker://code.forgejo.org/oci/docker:cli"
