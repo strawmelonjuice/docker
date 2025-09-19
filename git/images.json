@@ -1,0 +1,24 @@
+{
+  "runner_labels": [
+    {
+      "label": "ubuntu-latest",
+      "image": "docker://ubuntu:latest"
+    },
+    {
+      "label": "windows-latest", 
+      "image": "docker://mcr.microsoft.com/windows:ltsc2019"
+    },
+    {
+      "label": "fedora-42",
+      "image": "docker://fedora:42"
+    },
+    {
+      "label": "docker-cli",
+      "image": "docker://code.forgejo.org/oci/docker:cli"
+    },
+    {
+      "label": "node-bookworm",
+      "image": "docker://code.forgejo.org/oci/node:20-bookworm"
+    }
+  ]
+}
