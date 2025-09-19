@@ -27,7 +27,7 @@ services:
       - FORGEJO__DEFAULT__APP_SLOGAN="Strawmelonjuice's git server"
       - FORGEJO__server__ROOT_URL=https://git.strawmelonjuice.com
       - FORGEJO__server__OFFLINE_MODE=false
-      - FORGEJO__mirror__ENABLED=true
+      - FORGEJO__mirror__ENABLED=false
     networks:
       - forgejo
     ports:
@@ -93,7 +93,7 @@ services:
       forgejo-runner generate-config > config.yml ;
       sed -i -e "s|  level: info|  level: debug|" config.yml ;
       sed -i -e "s|network: .*|network: host|" config.yml ;
-      sed -i -e "s|^  envs:$$|  envs:\n  DOCKER_HOST: tcp://docker:2376\n  DOCKER_TLS_VERIFY: 1\n  DOCKER_CERT_PATH: /certs/client|" config.yml ;
+      sed -i -e "s|^  envs:$$|  envs:\n    DOCKER_HOST: tcp://docker:2376\n    DOCKER_TLS_VERIFY: 1\n    DOCKER_CERT_PATH: /certs/client|" config.yml ;
       sed -i -e "s|^  options:|  options: -v /certs/client:/certs/client|" config.yml ;
       sed -i -e "s|  valid_volumes: \[\]$$|  valid_volumes:\n    - /certs/client|" config.yml ;
       chown -R 1000:1000 /data ;
