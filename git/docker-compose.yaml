@@ -82,16 +82,15 @@ services:
       DOCKER_TLS_VERIFY: "1"
       SHARED_SECRET: ${SHARED_SECRET}
       RUNNER_TOKEN: ${RUNNER_TOKEN}
+      RUNNER_LABELS: ${RUNNER_LABELS}
     networks:
       - forgejo
     volumes:
       - ./data/runner-data:/data
       - ./data/docker_certs:/certs
-      - ./images.json:/images.json:ro
     command: >-
       bash -ec '
-      LABELS=$(cat /images.json | jq -r ".runner_labels | map(\"\(.label):\(.image)\") | join(\",\")")
-      forgejo-runner register --no-interactive --instance http://git:3000 --token ${RUNNER_TOKEN} --name runner --labels "$LABELS" || true ;
+      forgejo-runner register --no-interactive --instance http://git:3000 --token ${RUNNER_TOKEN} --name runner --labels "${RUNNER_LABELS}" || true ;
       forgejo-runner generate-config > config.yml ;
       sed -i -e "s|  level: info|  level: debug|" config.yml ;
       sed -i -e "s|network: .*|network: host|" config.yml ;
