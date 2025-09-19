@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Build custom images for CI runners.
+echo "Building Ubuntu development image..."
+docker build -f custom-images/Dockerfile.ubuntu-dev -t ubuntu-dev:latest . || { echo "Failed to build Ubuntu image"; exit 1; }
+
+echo "Building Fedora development image..."
+docker build -f custom-images/Dockerfile.fedora-dev -t fedora-dev:latest . || { echo "Failed to build Fedora image"; exit 1; }  
+
+echo "Building Alpine development image..."
+docker build -f custom-images/Dockerfile.alpine-dev -t alpine-dev:latest . || { echo "Failed to build Alpine image"; exit 1; }
+
+echo "Build complete!"
+echo "Available images:"
+echo "  ubuntu-dev:latest"
+echo "  fedora-dev:latest (default)"
+echo "  alpine-dev:latest"
+
+echo ""
+echo "Exporting images to tar files for DinD..."
+mkdir -p data/images
+
+echo "Exporting ubuntu-dev:latest..."
+docker save ubuntu-dev:latest > data/images/ubuntu-dev.tar || { echo "Failed to export Ubuntu image"; exit 1; }
+
+echo "Exporting fedora-dev:latest..."
+docker save fedora-dev:latest > data/images/fedora-dev.tar || { echo "Failed to export Fedora image"; exit 1; }
+
+echo "Exporting alpine-dev:latest..."
+docker save alpine-dev:latest > data/images/alpine-dev.tar || { echo "Failed to export Alpine image"; exit 1; }
+
+echo ""
+echo "Export complete! Tar files ready for DinD import:"
+echo "  data/images/ubuntu-dev.tar"
+echo "  data/images/fedora-dev.tar"
+echo "  data/images/alpine-dev.tar"

@@ -1,0 +1,34 @@
+FROM fedora:42
+
+# Install basic dependencies
+RUN dnf update -y && dnf install -y \
+    curl \
+    git \
+    gcc \
+    gcc-c++ \
+    make \
+    ca-certificates \
+    gnupg \
+    unzip \
+    && dnf clean all
+
+# Install mise
+RUN curl https://mise.run | sh
+ENV PATH="/root/.local/bin:$PATH"
+
+# Install default deps via mise
+RUN mise use -g node@lts
+RUN mise use -g bun@latest
+RUN mise use -g rust@latest
+RUN mise use -g gleam@latest
+RUN mise install
+
+
+# Verify installations, mise installs aren't in PATH until shell restart so they're not tested for.
+RUN mise --version
+
+# Set up mise to work in non-interactive shells
+RUN echo 'eval "$(mise activate bash)"' >> /root/.bashrc
+ENV MISE_ACTIVATE=1
+
+WORKDIR /workspace

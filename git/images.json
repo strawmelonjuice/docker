@@ -2,19 +2,27 @@
   "runner_labels": [
     {
       "label": "ubuntu-latest",
-      "image": "docker://ubuntu:latest"
+      "image": "ubuntu-dev:latest"
+    },
+    {
+      "label": "fedora-42", 
+      "image": "fedora-dev:latest"
+    },
+    {
+      "label": "fedora-latest",
+      "image": "fedora-dev:latest"
+    },
+    {
+      "label": "alpine-default",
+      "image": "alpine-dev:latest"
+    },
+    {
+      "label": "default",
+      "image": "fedora-dev:latest"
     },
     {
       "label": "windows-latest", 
       "image": "docker://mcr.microsoft.com/windows:ltsc2019"
-    },
-    {
-      "label": "fedora-42",
-      "image": "docker://fedora:42"
-    },
-     {
-      "label": "fedora-latest",
-      "image": "docker://fedora:42"
     },
     {
       "label": "docker-cli",

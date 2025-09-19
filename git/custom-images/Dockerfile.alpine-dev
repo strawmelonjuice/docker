@@ -1,0 +1,36 @@
+FROM node:current-alpine3.21
+
+# Install basic dependencies
+RUN apk update && apk add --no-cache \
+    curl \
+    git \
+    build-base \
+    ca-certificates \
+    gnupg \
+    unzip \
+    bash
+
+# Install mise
+RUN curl https://mise.run | sh
+ENV PATH="/root/.local/bin:$PATH"
+
+# Install default deps via mise
+RUN mise use -g rust@latest
+RUN mise use -g gleam@latest
+RUN mise install
+
+# Install Bun manually (Alpine compatibility issues)
+RUN curl -fsSL https://bun.sh/install | bash
+ENV PATH="/root/.bun/bin:$PATH"
+
+# Verify installations
+RUN mise --version
+RUN node --version
+RUN npm --version
+RUN bun --version
+
+# Set up mise to work in non-interactive shells
+RUN echo 'eval "$(mise activate bash)"' >> /root/.bashrc
+ENV MISE_ACTIVATE=1
+
+WORKDIR /workspace
