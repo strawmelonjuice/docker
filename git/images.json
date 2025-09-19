@@ -2,23 +2,23 @@
   "runner_labels": [
     {
       "label": "ubuntu-latest",
-      "image": "ubuntu-dev:latest"
+      "image": "docker://ubuntu-dev:latest"
     },
     {
       "label": "fedora-42", 
-      "image": "fedora-dev:latest"
+      "image": "docker://fedora-dev:latest"
     },
     {
       "label": "fedora-latest",
-      "image": "fedora-dev:latest"
+      "image": "docker://fedora-dev:latest"
     },
     {
       "label": "alpine-default",
-      "image": "alpine-dev:latest"
+      "image": "docker://alpine-dev:latest"
     },
     {
       "label": "default",
-      "image": "fedora-dev:latest"
+      "image": "docker://fedora-dev:latest"
     },
     {
       "label": "windows-latest", 
@@ -27,10 +27,6 @@
     {
       "label": "docker-cli",
       "image": "docker://code.forgejo.org/oci/docker:cli"
-    },
-    {
-      "label": "node-bookworm",
-      "image": "docker://code.forgejo.org/oci/node:20-bookworm"
     }
   ]
 }

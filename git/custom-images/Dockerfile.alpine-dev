@@ -18,10 +18,14 @@ ENV PATH="/root/.local/bin:$PATH"
 RUN mise use -g rust@latest
 RUN mise use -g gleam@latest
 RUN mise install
+RUN eval "$(mise activate bash --shims)"
 
 # Install Bun manually (Alpine compatibility issues)
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="/root/.bun/bin:$PATH"
+
+# Add the mise shim path to PATH (for rust, gleam, etc.)
+ENV PATH="/root/.local/share/mise/shims:$PATH"
 
 # Verify installations
 RUN mise --version

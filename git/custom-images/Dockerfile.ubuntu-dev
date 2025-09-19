@@ -20,12 +20,16 @@ RUN mise use -g bun@latest
 RUN mise use -g rust@latest
 RUN mise use -g gleam@latest
 RUN mise install
-
-# Verify installations, mise installs aren't in PATH until shell restart so they're not tested for.
-RUN mise --version
+RUN eval "$(mise activate bash --shims)"
 
 # Set up mise to work in non-interactive shells
 RUN echo 'eval "$(mise activate bash)"' >> /root/.bashrc
 ENV MISE_ACTIVATE=1
+
+# Add the mise shim path to PATH
+ENV PATH="/root/.local/share/mise/shims:$PATH"
+
+# Verify the tools are accessible
+RUN node --version && npm --version
 
 WORKDIR /workspace
