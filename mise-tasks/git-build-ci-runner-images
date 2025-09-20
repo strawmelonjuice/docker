@@ -1,11 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#MISE description="Build custom images for CI"
+#MISE dir="git"
 
 # Build custom images for CI runners.
 echo "Building Ubuntu development image..."
 docker build -f custom-images/Dockerfile.ubuntu-dev -t ubuntu-dev:latest . || { echo "Failed to build Ubuntu image"; exit 1; }
 
 echo "Building Fedora development image..."
-docker build -f custom-images/Dockerfile.fedora-dev -t fedora-dev:latest . || { echo "Failed to build Fedora image"; exit 1; }  
+docker build -f custom-images/Dockerfile.fedora-dev -t fedora-dev:latest . || { echo "Failed to build Fedora image"; exit 1; }
 
 echo "Building Alpine development image..."
 docker build -f custom-images/Dockerfile.alpine-dev -t alpine-dev:latest . || { echo "Failed to build Alpine image"; exit 1; }
