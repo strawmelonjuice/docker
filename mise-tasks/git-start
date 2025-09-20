@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#MISE description="Import CI images and start forgejo and runners."
+#MISE description="Import CI images and start forgejo and runners. (docker)"
 #MISE wait_for=["git-build-ci-runner-images"]
 #MISE dir="git"
 set -euxo pipefail
@@ -15,4 +15,4 @@ else
 fi
 
 # Start docker-compose
-docker-compose up -d
+docker compose up -d

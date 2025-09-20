@@ -1,2 +1,64 @@
 [settings]
 yes = true
+
+[tasks.all-start]
+description = "Start all services"
+run = [
+  { tasks = ["git-build-ci-runner-images", "git-start", "git-mirror-sync-start", "strawmediajuice-start"] },
+]
+
+[tasks.all-stop]
+description = "Stop all services"
+run = [
+  { tasks = ["git-stop", "git-mirror-sync-stop", "strawmediajuice-stop"] },
+]
+
+[tasks.all-restart]
+description = "Stop and restart all services"
+run = [
+  { tasks = ["git-build-ci-runner-images", "git-restart", "git-mirror-sync-restart", "strawmediajuice-restart"] },
+]
+
+[tasks.strawmediajuice-start]
+description = "Start strawmediajuice service (docker)"
+run = "docker compose up -d"
+dir = "strawmediajuice"
+
+[tasks.strawmediajuice-stop]
+description = "Stop strawmediajuice service (docker)"
+run = "docker compose down"
+dir = "strawmediajuice"
+
+[tasks.strawmediajuice-restart]
+description = "Stop and restart strawmediajuice service (docker)"
+run = [
+{ task = "strawmediajuice-stop" },
+  { task = "strawmediajuice-start" },
+]
+
+[tasks.git-mirror-sync-start]
+description = "Start git mirror service (systemd/bash)"
+run = "systemctl start git-mirror-sync.service"
+
+[tasks.git-mirror-sync-stop]
+description = "Stop git mirror service (systemd/bash)"
+run = "systemctl stop git-mirror-sync.service"
+
+[tasks.git-mirror-sync-restart]
+description = "Stop and restart git mirror service (systemd/bash)"
+run = [
+{ task = "git-mirror-sync-stop" },
+  { task = "git-mirror-sync-start" },
+]
+
+[tasks.git-stop]
+description = "Stop forgejo and runners (docker)"
+run = "docker compose down"
+dir = "git"
+
+[tasks.git-restart]
+description = "Stop and restart strawmediajuice service (docker)"
+run = [
+{ task = "git-stop" },
+  { task = "git-start" },
+]
