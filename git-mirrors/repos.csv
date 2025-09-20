@@ -1,10 +1,12 @@
 # Source,Target
-
-## From my personal forge to knot.nuv.sh: Lumina
-# https://git.strawmelonjuice.com/strawmelonjuice/lumina.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina
-
 ## From my personal forge to Codeberg: Lumina
 https://git.strawmelonjuice.com/strawmelonjuice/lumina.git,git@codeberg.org:strawmelonjuice/lumina.git
 
 ## From my personal forge to Codeberg: Strawmediajuice
 https://git.strawmelonjuice.com/strawmelonjuice/strawmediajuice.git,git@codeberg.org:strawmelonjuice/strawmediajuice.git
+
+## From my personal forge to Codeberg: Strawmelonservices (this repo.)
+https://git.strawmelonjuice.com/strawmelonjuice/docker.git,git@codeberg.org:strawmelonjuice/docker.git
+
+## From my personal forge to GitHub: Strawmelonservices (this repo.)
+https://git.strawmelonjuice.com/strawmelonjuice/docker.git,git@codeberg.org:strawmelonjuice/docker.git
