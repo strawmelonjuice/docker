@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#MISE description="Import CI images and start forgejo and runners."
+#MISE wait_for=["git-build-ci-runner-images"]
+#MISE dir="git"
+set -euxo pipefail
+
 
 # Parse runner labels from images.json using host jq
 if [ -f "images.json" ]; then
