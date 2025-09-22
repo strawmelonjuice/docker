@@ -2,12 +2,10 @@ FROM fedora:42
 
 # Install basic dependencies
 RUN dnf update -y && dnf install -y \
-    curl \
     git \
     gcc \
     gcc-c++ \
     make \
-    ca-certificates \
     gnupg \
     unzip \
     autoconf \
@@ -39,6 +37,8 @@ RUN dnf update -y && dnf install -y \
     systemtap \
     valgrind \
     cmake \
+    ncurses-devel \
+    openssl-devel \
     && dnf clean all
 
 # Install mise
