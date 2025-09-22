@@ -4,7 +4,8 @@ yes = true
 [tasks.all-start]
 description = "Start all services"
 run = [
-  { tasks = ["git-build-ci-runner-images", "git-start", "git-mirror-sync-start", "strawmediajuice-start"] },
+  {task = "git-build-ci-runner-images"},
+  { tasks = ["git-start", "git-mirror-sync-start", "strawmediajuice-start"] },
 ]
 
 [tasks.all-stop]
@@ -16,7 +17,7 @@ run = [
 [tasks.all-restart]
 description = "Stop and restart all services"
 run = [
-  { tasks = ["git-build-ci-runner-images", "git-restart", "git-mirror-sync-restart", "strawmediajuice-restart"] },
+  { tasks = ["git-restart", "git-mirror-sync-restart", "strawmediajuice-restart"] },
 ]
 
 [tasks.strawmediajuice-start]
