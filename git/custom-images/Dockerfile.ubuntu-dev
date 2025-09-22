@@ -8,6 +8,17 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     gnupg \
     unzip \
+    autoconf \
+    automake \
+    bison \
+    flex \
+    libtool \
+    pkgconf \
+    cmake \
+    ncurses-dev \
+    libssl-dev \
+    zlib1g-dev \
+    openssh-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Install mise
