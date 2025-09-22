@@ -5,6 +5,8 @@
 
 # Use a loop to run the sync process indefinitely
 
+git pull
+
 echo "Git Sync Script Initialized with CSV Input:"
 cat repos.csv
 echo "\n"
