@@ -11,7 +11,34 @@ RUN dnf update -y && dnf install -y \
     gnupg \
     unzip \
     autoconf \
-    && dnf group install "Development Tools" \
+    automake \
+    binutils \
+    bison \
+    flex \
+    gdb \
+    glibc-devel \
+    libtool \
+    pkgconf \
+    pkgconf-m4 \
+    pkgconf-pkg-config \
+    redhat-rpm-config \
+    rpm-build \
+    rpm-sign \
+    strace \
+    asciidoc \
+    byacc \
+    ctags \
+    diffstat \
+    intltool \
+    ltrace \
+    patchutils \
+    perl-Fedora-VSP \
+    perl-generators \
+    pesign \
+    source-highlight \
+    systemtap \
+    valgrind \
+    cmake \
     && dnf clean all
 
 # Install mise
