@@ -11,7 +11,7 @@ RUN dnf update -y && dnf install -y \
     gnupg \
     unzip \
     autoconf \
-    && dnf groupinstall "Development Tools" \
+    && dnf group install "Development Tools" \
     && dnf clean all
 
 # Install mise
