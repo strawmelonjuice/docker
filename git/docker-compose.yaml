@@ -74,6 +74,8 @@ services:
       dockerd-entrypoint.sh &
       sleep 15;
       export DOCKER_HOST=unix:///var/run/docker.sock;
+      echo 'Pruning unused images...';
+      docker image prune -a -f;
       echo 'Loading custom images into DinD...';
       if [ -f /images/ubuntu-dev.tar ]; then 
         echo 'Loading ubuntu-dev.tar...';
