@@ -4,11 +4,26 @@ FROM node:current-alpine3.21
 RUN apk update && apk add --no-cache \
     curl \
     git \
+    bash \
     build-base \
-    ca-certificates \
-    gnupg \
-    unzip \
-    bash
+    autoconf \
+    automake \
+    bison \
+    flex \
+    libtool \
+    pkgconf \
+    strace \
+    asciidoc \
+    ctags \
+    intltool \
+    ltrace \
+    patchutils \
+    perl-dev \
+    cmake \
+    ncurses-dev \
+    openssl-dev \
+    zlib-dev \
+    openssh-client
 
 # Install mise
 RUN curl https://mise.run | sh
