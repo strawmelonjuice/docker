@@ -14,10 +14,13 @@ RUN apk update && apk add --no-cache \
 RUN curl https://mise.run | sh
 ENV PATH="/root/.local/bin:$PATH"
 
-# Install default deps via mise
-RUN mise use -g rust@latest
-RUN mise use -g gleam@latest
-RUN mise install
+# Install but not activate ('use') default deps via mise.
+RUN mise install rust@latest
+RUN mise install gleam@latest
+RUN mise install erlang@27
+RUN mise install erlang@28
+
+# Generate shims
 RUN eval "$(mise activate bash --shims)"
 
 # Install Bun manually (Alpine compatibility issues)

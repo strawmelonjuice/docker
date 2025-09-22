@@ -10,18 +10,27 @@ RUN dnf update -y && dnf install -y \
     ca-certificates \
     gnupg \
     unzip \
+    autoconf \
+    && dnf groupinstall "Development Tools" \
     && dnf clean all
 
 # Install mise
 RUN curl https://mise.run | sh
 ENV PATH="/root/.local/bin:$PATH"
 
-# Install default deps via mise
+# Install but not activate ('use') default deps via mise.
+RUN mise install node@lts
+RUN mise install bun@latest
+RUN mise install rust@latest
+RUN mise install gleam@latest
+RUN mise install erlang@27
+RUN mise install erlang@28
+
+# Preactivate Node and Bun
 RUN mise use -g node@lts
 RUN mise use -g bun@latest
-RUN mise use -g rust@latest
-RUN mise use -g gleam@latest
-RUN mise install
+
+# Generate shims
 RUN eval "$(mise activate bash --shims)"
 
 # Set up mise to work in non-interactive shells
