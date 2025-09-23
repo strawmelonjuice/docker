@@ -5,13 +5,39 @@
 set -euxo pipefail
 
 
-# Parse runner labels from images.json using host jq
-if [ -f "images.json" ]; then
-    export RUNNER_LABELS=$(jq -r '.runner_labels | map("\(.label):\(.image)") | join(",")' images.json)
+# Parse runner labels from images.jsonc using host jq (strip comments first)
+if [ -f "images.jsonc" ]; then
+    # Strip comments from JSONC using a more precise method
+    export RUNNER_LABELS=$(python3 -c "
+import json, re, sys
+with open('images.jsonc', 'r') as f:
+    content = f.read()
+# Remove line comments (// at start of line or after whitespace, but not in strings)
+lines = []
+in_string = False
+for line in content.split('\n'):
+    cleaned_line = ''
+    i = 0
+    while i < len(line):
+        char = line[i]
+        if char == '\"' and (i == 0 or line[i-1] != '\\\\'):
+            in_string = not in_string
+            cleaned_line += char
+        elif not in_string and char == '/' and i+1 < len(line) and line[i+1] == '/':
+            break  # Rest of line is comment
+        else:
+            cleaned_line += char
+        i += 1
+    lines.append(cleaned_line)
+content = '\n'.join(lines)
+data = json.loads(content)
+labels = [f\"{item['label']}:{item['image']}\" for item in data['runner_labels']]
+print(','.join(labels))
+")
     echo "Parsed runner labels: $RUNNER_LABELS"
 else
-    echo "Warning: images.json not found, using default labels"
-    export RUNNER_LABELS="ubuntu-latest:docker://ubuntu:latest"
+    echo "Warning: images.jsonc not found, using default labels"
+    export RUNNER_LABELS="ubuntu-latest:docker://strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev,fedora-42:docker://strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev,fedora-latest:docker://strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev,alpine-default:docker://strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev,default:docker://strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev,docker-cli:docker://code.forgejo.org/oci/docker:cli"
 fi
 
 # Start docker-compose

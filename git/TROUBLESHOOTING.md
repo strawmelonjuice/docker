@@ -44,7 +44,7 @@
 
 
 If you see `unauthenticated: unregistered runner` and you manage tokens and registration via docker-compose (not the web UI), try the following:
-   1. **Always use the `mise run git-start` script to start your stack.** This script parses `images.json` and sets the correct `RUNNER_LABELS` before running `docker compose up -d`. Running `docker compose up -d` directly will not set labels and can cause registration or job pickup to fail.
+   1. **Always use the `mise run git-start` script to start your stack.** This script parses `images.jsonc` and sets the correct `RUNNER_LABELS` before running `docker compose up -d`. Running `docker compose up -d` directly will not set labels and can cause registration or job pickup to fail.
    2. Stop the runner container if it's running.
    3. Ensure your `.env` or compose file has a valid `RUNNER_TOKEN` and `SHARED_SECRET` (these should be generated and managed by your automation, not manually from the web UI).
    4. Double-check that the `runner-daemon` service in `docker-compose.yaml` is running the registration command on startup, and that it is not failing silently (see logs for registration output).
@@ -55,7 +55,7 @@ If you see `unauthenticated: unregistered runner` and you manage tokens and regi
 **Note:** If you do not use the web UI to fetch tokens, ensure your automation or provisioning scripts are generating and injecting valid tokens into the environment before starting the runner. If the runner still fails to register, check for network issues, service startup order, or token mismatches between the runner and Forgejo server.
 
 **Labels troubleshooting:**
-If the runner registers but has no labels, it is likely because `RUNNER_LABELS` was not set. Always use the `mise run git-start` script to ensure labels are parsed and exported from `images.json`.
+If the runner registers but has no labels, it is likely because `RUNNER_LABELS` was not set. Always use the `mise run git-start` script to ensure labels are parsed and exported from `images.jsonc`.
 
 ---
 
