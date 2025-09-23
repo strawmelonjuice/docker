@@ -19,20 +19,23 @@ echo "  fedora-dev:latest (default)"
 echo "  alpine-dev:latest"
 
 echo ""
-echo "Exporting images to tar files for DinD..."
-mkdir -p data/images
-
-echo "Exporting ubuntu-dev:latest..."
-docker save ubuntu-dev:latest > data/images/ubuntu-dev.tar || { echo "Failed to export Ubuntu image"; exit 1; }
-
-echo "Exporting fedora-dev:latest..."
-docker save fedora-dev:latest > data/images/fedora-dev.tar || { echo "Failed to export Fedora image"; exit 1; }
-
-echo "Exporting alpine-dev:latest..."
-docker save alpine-dev:latest > data/images/alpine-dev.tar || { echo "Failed to export Alpine image"; exit 1; }
+echo "Tagging images for DockerHub..."
+docker tag ubuntu-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev
+docker tag fedora-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev
+docker tag alpine-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev
 
 echo ""
-echo "Export complete! Tar files ready for DinD import:"
-echo "  data/images/ubuntu-dev.tar"
-echo "  data/images/fedora-dev.tar"
-echo "  data/images/alpine-dev.tar"
+echo "Pushing images to DockerHub..."
+docker push strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev || { echo "Failed to push Ubuntu image"; exit 1; }
+docker push strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev || { echo "Failed to push Fedora image"; exit 1; }
+docker push strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev || { echo "Failed to push Alpine image"; exit 1; }
+
+echo ""
+echo "Push complete! Images available on DockerHub:"
+echo "  strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev"
+echo "  strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev"
+echo "  strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev"
+
+echo ""
+echo "Cleaning up unused Docker resources..."
+docker system prune -a -f

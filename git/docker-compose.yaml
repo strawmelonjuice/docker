@@ -68,7 +68,7 @@ services:
       - forgejo
     volumes:
       - ./data/docker_certs:/certs
-      - ./data/images:/images:ro
+      - ./data/docker_storage:/var/lib/docker
     command: >-
       sh -c "
       dockerd-entrypoint.sh &
@@ -76,31 +76,7 @@ services:
       export DOCKER_HOST=unix:///var/run/docker.sock;
       echo 'Pruning unused images...';
       docker image prune -a -f;
-      echo 'Loading custom images into DinD...';
-      if [ -f /images/ubuntu-dev.tar ]; then 
-        echo 'Loading ubuntu-dev.tar...';
-        docker load < /images/ubuntu-dev.tar;
-        echo 'Ubuntu image loaded successfully';
-      else
-        echo 'ubuntu-dev.tar not found';
-      fi;
-      if [ -f /images/fedora-dev.tar ]; then 
-        echo 'Loading fedora-dev.tar...';
-        docker load < /images/fedora-dev.tar;
-        echo 'Fedora image loaded successfully';
-      else
-        echo 'fedora-dev.tar not found';
-      fi;
-      if [ -f /images/alpine-dev.tar ]; then 
-        echo 'Loading alpine-dev.tar...';
-        docker load < /images/alpine-dev.tar;
-        echo 'Alpine image loaded successfully';
-      else
-        echo 'alpine-dev.tar not found';
-      fi;
-      echo 'Listing all available images:';
-      docker images;
-      echo 'Custom images loading complete!';
+      echo 'DinD ready - images will be pulled from DockerHub as needed';
       wait
       "
 

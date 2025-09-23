@@ -2,23 +2,23 @@
   "runner_labels": [
     {
       "label": "ubuntu-latest",
-      "image": "docker://ubuntu-dev:latest"
+      "image": "docker://strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev"
     },
     {
       "label": "fedora-42", 
-      "image": "docker://fedora-dev:latest"
+      "image": "docker://strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev"
     },
     {
       "label": "fedora-latest",
-      "image": "docker://fedora-dev:latest"
+      "image": "docker://strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev"
     },
     {
       "label": "alpine-default",
-      "image": "docker://alpine-dev:latest"
+      "image": "docker://strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev"
     },
     {
       "label": "default",
-      "image": "docker://fedora-dev:latest"
+      "image": "docker://strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev"
     },
     {
       "label": "windows-latest", 

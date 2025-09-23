@@ -4,7 +4,7 @@ yes = true
 [tasks.all-start]
 description = "Start all services"
 run = [
-  {task = "git-build-ci-runner-images"},
+  { task = "git-build-ci-runner-images" },
   { tasks = ["git-start", "git-mirror-sync-start", "strawmediajuice-start"] },
 ]
 
