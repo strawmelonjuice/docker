@@ -12,11 +12,25 @@ docker build -f custom-images/Dockerfile.fedora-dev -t fedora-dev:latest . || { 
 echo "Building Alpine development image..."
 docker build -f custom-images/Dockerfile.alpine-dev -t alpine-dev:latest . || { echo "Failed to build Alpine image"; exit 1; }
 
+# Check if we're on ARM architecture
+ARCH=$(uname -m)
+if [[ "$ARCH" == "aarch64" || "$ARCH" == "arm64" ]]; then
+    echo "Skipping Windows development image (not available on ARM architecture)..."
+else
+    echo "Building Windows development image..."
+    docker build -f custom-images/Dockerfile.windows-dev -t windows-dev:latest . || { echo "Failed to build Windows image"; exit 1; }
+fi
+
 echo "Build complete!"
 echo "Available images:"
 echo "  ubuntu-dev:latest"
 echo "  fedora-dev:latest (default)"
 echo "  alpine-dev:latest"
+if [[ "$ARCH" != "aarch64" && "$ARCH" != "arm64" ]]; then
+    echo "  windows-dev:latest"
+else
+    echo "  windows-dev:latest (skipped - not available on ARM)"
+fi
 
 echo ""
 echo "Tagging images for DockerHub..."
@@ -24,17 +38,32 @@ docker tag ubuntu-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:ubu
 docker tag fedora-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev
 docker tag alpine-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev
 
+# Only tag Windows if it was built
+if [[ "$ARCH" != "aarch64" && "$ARCH" != "arm64" ]]; then
+    docker tag windows-dev:latest strawmelonjuice/git.strawmelonjuice.com-runners:windows-dev
+fi
+
 echo ""
 echo "Pushing images to DockerHub..."
 docker push strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev || { echo "Failed to push Ubuntu image"; exit 1; }
 docker push strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev || { echo "Failed to push Fedora image"; exit 1; }
 docker push strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev || { echo "Failed to push Alpine image"; exit 1; }
 
+# Only push Windows if it was built
+if [[ "$ARCH" != "aarch64" && "$ARCH" != "arm64" ]]; then
+    docker push strawmelonjuice/git.strawmelonjuice.com-runners:windows-dev || { echo "Failed to push Windows image"; exit 1; }
+fi
+
 echo ""
 echo "Push complete! Images available on DockerHub:"
 echo "  strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev"
 echo "  strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev"
 echo "  strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev"
+if [[ "$ARCH" != "aarch64" && "$ARCH" != "arm64" ]]; then
+    echo "  strawmelonjuice/git.strawmelonjuice.com-runners:windows-dev"
+else
+    echo "  strawmelonjuice/git.strawmelonjuice.com-runners:windows-dev (skipped - requires x86_64 host)"
+fi
 
 echo ""
 echo "Cleaning up unused Docker resources..."
