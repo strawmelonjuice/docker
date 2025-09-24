@@ -1,6 +1,6 @@
 FROM fedora:42
 
-# Install basic dependencies
+# Install basic dependencies and mise 
 RUN dnf update -y && dnf install -y \
     git \
     gcc \
@@ -39,26 +39,26 @@ RUN dnf update -y && dnf install -y \
     cmake \
     ncurses-devel \
     openssl-devel \
-    && dnf clean all
-
-# Install mise
-RUN curl https://mise.run | sh
+    && dnf clean all \
+    && curl https://mise.run | sh
+# Add mise to PATH
 ENV PATH="/root/.local/bin:$PATH"
 
 # Install but not activate ('use') default deps via mise.
-RUN mise install node@lts
-RUN mise install bun@latest
-RUN mise install rust@latest
-RUN mise install gleam@latest
-RUN mise install erlang@27
-RUN mise install erlang@28
+RUN mise install node@lts bun@latest rust@latest gleam@latest erlang@27 erlang@28
 
-# Preactivate Node and Bun
-RUN mise use -g node@lts
-RUN mise use -g bun@latest
+# Preactivate Node and Bun and generate shims
+RUN mise use -g node@lts bun@latest \
+    && eval "$(mise activate bash --shims)"
 
-# Generate shims
-RUN eval "$(mise activate bash --shims)"
+# Install Gitea tea CLI
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then ARCH="amd64"; \
+    elif [ "$ARCH" = "aarch64" ]; then ARCH="arm64"; \
+    elif [ "$ARCH" = "armv7l" ]; then ARCH="arm-7"; \
+    fi && \
+    curl -L "https://gitea.com/gitea/tea/releases/download/v0.11.0/tea-0.11.0-linux-${ARCH}" -o /usr/local/bin/tea \
+    && chmod +x /usr/local/bin/tea
 
 # Set up mise to work in non-interactive shells
 RUN echo 'eval "$(mise activate bash)"' >> /root/.bashrc
@@ -68,6 +68,6 @@ ENV MISE_ACTIVATE=1
 ENV PATH="/root/.local/share/mise/shims:$PATH"
 
 # Verify the tools are accessible
-RUN node --version && npm --version
+RUN node --version && npm --version && tea --version
 
 WORKDIR /workspace

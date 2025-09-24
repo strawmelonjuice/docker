@@ -1,6 +1,6 @@
 FROM node:current-alpine3.21
 
-# Install basic dependencies
+# Install basic dependencies and mise
 RUN apk update && apk add --no-cache \
     curl \
     git \
@@ -23,17 +23,15 @@ RUN apk update && apk add --no-cache \
     ncurses-dev \
     openssl-dev \
     zlib-dev \
-    openssh-client
+    openssh-client \
+    && rm -rf /var/cache/apk/* \
+    && curl https://mise.run | sh
 
-# Install mise
-RUN curl https://mise.run | sh
+# Add mise to PATH
 ENV PATH="/root/.local/bin:$PATH"
 
 # Install but not activate ('use') default deps via mise.
-RUN mise install rust@latest
-RUN mise install gleam@latest
-RUN mise install erlang@27
-RUN mise install erlang@28
+RUN mise install rust@latest gleam@latest erlang@27 erlang@28
 
 # Generate shims
 RUN eval "$(mise activate bash --shims)"
@@ -42,14 +40,20 @@ RUN eval "$(mise activate bash --shims)"
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="/root/.bun/bin:$PATH"
 
+# Install Gitea tea CLI
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then ARCH="amd64"; \
+    elif [ "$ARCH" = "aarch64" ]; then ARCH="arm64"; \
+    elif [ "$ARCH" = "armv7l" ]; then ARCH="arm-7"; \
+    fi && \
+    curl -L "https://gitea.com/gitea/tea/releases/download/v0.11.0/tea-0.11.0-linux-${ARCH}" -o /usr/local/bin/tea \
+    && chmod +x /usr/local/bin/tea
+
 # Add the mise shim path to PATH (for rust, gleam, etc.)
 ENV PATH="/root/.local/share/mise/shims:$PATH"
 
 # Verify installations
-RUN mise --version
-RUN node --version
-RUN npm --version
-RUN bun --version
+RUN mise --version && node --version && npm --version && bun --version && tea --version
 
 # Set up mise to work in non-interactive shells
 RUN echo 'eval "$(mise activate bash)"' >> /root/.bashrc

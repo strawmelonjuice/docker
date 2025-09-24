@@ -37,6 +37,10 @@ RUN mise install erlang@28
 RUN mise use -g node@lts
 RUN mise use -g bun@latest
 
+# Install Gitea tea CLI
+RUN $progressPreference = 'silentlyContinue'; \
+    Invoke-WebRequest -Uri 'https://gitea.com/gitea/tea/releases/download/v0.11.0/tea-0.11.0-windows-amd64.exe' -OutFile 'C:\Windows\tea.exe'
+
 # Set up mise to work in non-interactive shells
 RUN echo 'mise activate powershell | Out-String | Invoke-Expression' >> $PROFILE.AllUsersAllHosts
 ENV MISE_ACTIVATE=1
@@ -45,7 +49,7 @@ ENV MISE_ACTIVATE=1
 RUN setx PATH "%PATH%;C:\Users\ContainerUser\.local\share\mise\shims" /M
 
 # Verify installations
-RUN node --version ; npm --version ; git --version ; mise --version
+RUN node --version ; npm --version ; git --version ; mise --version ; tea --version
 
 # Set working directory
 WORKDIR C:\\workspace
