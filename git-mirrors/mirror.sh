@@ -58,7 +58,7 @@ while true; do
             echo "Pushing all branches to $target_repo..."
             git push --all --force "$target_repo"
             if [ $? -ne 0 ]; then
-                echo "Warning: Failed to push branches."
+                echo "Warning: Failed to push branches to $target_repo"
                 cd - > /dev/null
                 rm -rf "$temp_dir"
                 exit 3
@@ -67,7 +67,7 @@ while true; do
             echo "Pushing all tags to $target_repo..."
             git push --tags --force "$target_repo"
             if [ $? -ne 0 ]; then
-                echo "Warning: Failed to push tags."
+                echo "Warning: Failed to push tags to $target_repo"
                 cd - > /dev/null
                 rm -rf "$temp_dir"
                 exit 4

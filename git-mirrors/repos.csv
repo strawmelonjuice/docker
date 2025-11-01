@@ -1,6 +1,9 @@
 # Source,Target
-## From my personal forge to Codeberg: Lumina
-https://git.strawmelonjuice.com/strawmelonjuice/lumina.git,git@codeberg.org:strawmelonjuice/lumina.git
+## From Codeberg to my personal forge: Lumina
+git@codeberg.org:strawmelonjuice/Lumina.git,git@git.strawmelonjuice.com:strawmelonjuice/Lumina.git
+
+## From my personal forge to GitHub: Lumina
+https://git.strawmelonjuice.com/strawmelonjuice/lumina.git,git@github.com:strawmelonjuice/lumina.git
 
 ## From my personal forge to Codeberg: Strawmediajuice
 https://git.strawmelonjuice.com/strawmelonjuice/strawmediajuice.git,git@codeberg.org:strawmelonjuice/strawmediajuice.git
