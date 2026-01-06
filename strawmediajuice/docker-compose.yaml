@@ -1,6 +1,6 @@
 services:
   strawmedia:
-    image: strawmelonjuice/strawmediajuice:1.1.1
+    image: strawmelonjuice/strawmediajuice:1.2.1
     restart: unless-stopped
     environment:
       - PORT=3022
