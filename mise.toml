@@ -4,7 +4,7 @@ yes = true
 [tasks.all-start]
 description = "Start all services"
 run = [
-  { task = "git-build-ci-runner-images" },
+  { task = "git-pull-ci-runner-images" },
   { tasks = ["git-start", "git-mirror-sync-start", "strawmediajuice-start", "site-start"] },
 ]
 
@@ -25,6 +25,13 @@ description = "Start strawmediajuice service (docker)"
 run = "docker compose up -d"
 dir = "strawmediajuice"
 
+[tasks.git-pull-ci-runner-images]
+description = "Pull CI runner images from dockerhub"
+run = [
+  "docker pull strawmelonjuice/git.strawmelonjuice.com-runners:alpine-dev",
+  "docker pull strawmelonjuice/git.strawmelonjuice.com-runners:ubuntu-dev",
+  "docker pull strawmelonjuice/git.strawmelonjuice.com-runners:fedora-dev"
+]
 
 [tasks.strawmediajuice-stop]
 description = "Stop strawmediajuice service (docker)"
