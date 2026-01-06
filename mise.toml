@@ -75,7 +75,7 @@ run = [
 [tasks.site-start]
 description="Start strawmelonjuice site (Podman/Cynthia)"
 run= [
-"podman build . -t strawmelonjuice-site",
+"podman build . -t strawmelonjuice-site --network=host",
 "podman run -d --rm -p 8080:3033 --name strawmelonjuice-site strawmelonjuice-site:latest"
 ]
 dir = "strawmelonjuice-site"
