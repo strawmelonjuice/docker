@@ -1,5 +1,9 @@
 [settings]
 yes = true
+[shell_alias]
+# The strawmelonservices server currently is set up in a way that it is half-rootless and half rootful
+# This is kind of a transition-step.
+podman='sudo -u mar podman'
 
 [tasks.all-start]
 description = "Start all services"
