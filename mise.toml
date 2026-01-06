@@ -25,6 +25,7 @@ description = "Start strawmediajuice service (docker)"
 run = "docker compose up -d"
 dir = "strawmediajuice"
 
+
 [tasks.strawmediajuice-stop]
 description = "Stop strawmediajuice service (docker)"
 run = "docker compose down"
@@ -58,8 +59,27 @@ run = "docker compose down"
 dir = "git"
 
 [tasks.git-restart]
-description = "Stop and restart strawmediajuice service (docker)"
+description = "Stop and restart forgejo service (docker)"
 run = [
 { task = "git-stop" },
   { task = "git-start" },
+]
+
+[tasks.site-start]
+description="Start strawmelonjuice site (Podman/Cynthia)"
+run= [
+"podman build . -t strawmelonjuice-site",
+"podman run -d --rm -p 8080:3033 --name strawmelonjuice-site strawmelonjuice-site:latest"
+]
+dir = "strawmelonjuice-site"
+
+[tasks.site-stop]
+description="Stop strawmelonjuice site (Podman/Cynthia)"
+run = ["podman stop strawmelonjuice-site","podman rmi strawmelonjuice-site:latest"]
+
+[tasks.site-restart]
+description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
+run = [
+{ task = "site-stop" },
+  { task = "site-start" },
 ]

@@ -1,0 +1,6 @@
+FROM oven/bun:1 AS base
+RUN apt update && apt install git curl -y
+WORKDIR /usr/src/app
+COPY start.sh ./
+EXPOSE 8080/tcp
+ENTRYPOINT [ "bash", "start.sh" ]
