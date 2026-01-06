@@ -2,6 +2,9 @@
 ## From Codeberg to my personal forge: Lumina
 git@codeberg.org:strawmelonjuice/Lumina.git,git@git.strawmelonjuice.com:strawmelonjuice/Lumina.git
 
+## From Codeberg to Tangled (Nuv's knot): Lumina
+git@codeberg.org:strawmelonjuice/Lumina.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina
+
 ## From my personal forge to GitHub: Lumina
 https://git.strawmelonjuice.com/strawmelonjuice/lumina.git,git@github.com:strawmelonjuice/lumina.git
 
