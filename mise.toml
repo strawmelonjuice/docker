@@ -79,14 +79,14 @@ run = [
 [tasks.site-start]
 description="Start strawmelonjuice site (Podman/Cynthia)"
 run= [
-"podman build . -t strawmelonjuice-site --network=host",
-"podman run -d --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
+"sudo -u mar podman build . -t strawmelonjuice-site --network=host",
+"sudo -u mar podman run -d --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
 ]
 dir = "strawmelonjuice-site"
 
 [tasks.site-stop]
 description="Stop strawmelonjuice site (Podman/Cynthia)"
-run = ["podman stop strawmelonjuice-site","podman rmi strawmelonjuice-site:latest"]
+run = ["sudo -u mar podman stop strawmelonjuice-site","podman rmi strawmelonjuice-site:latest"]
 
 [tasks.site-restart]
 description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
