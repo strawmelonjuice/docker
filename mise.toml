@@ -76,7 +76,7 @@ run = [
 description="Start strawmelonjuice site (Podman/Cynthia)"
 run= [
 "docker build . -t strawmelonjuice-site --network=host",
-"docker run -d --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
+"docker run -d --restart unless-stopped --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
 ]
 dir = "strawmelonjuice-site"
 
