@@ -23,7 +23,7 @@ services:
       - FORGEJO__database__NAME=forgejo
       - FORGEJO__database__USER=forgejo
       - FORGEJO__database__PASSWD=forgejo
-      - FORGEJO__DEFAULT__APP_NAME="Strawmelonjuice forge"
+      - FORGEJO__DEFAULT__APP_NAME="Mar's forge"
       - FORGEJO__DEFAULT__APP_SLOGAN="Strawmelonjuice's git server"
       - FORGEJO__server__ROOT_URL=https://forge.strawmelonjuice.com
       - FORGEJO__server__OFFLINE_MODE=false
