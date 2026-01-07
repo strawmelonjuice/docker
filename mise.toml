@@ -1,9 +1,5 @@
 [settings]
 yes = true
-[shell_alias]
-# The strawmelonservices server currently is set up in a way that it is half-rootless and half rootful
-# This is kind of a transition-step.
-podman='sudo -u mar podman'
 
 [tasks.all-start]
 description = "Start all services"
@@ -79,14 +75,14 @@ run = [
 [tasks.site-start]
 description="Start strawmelonjuice site (Podman/Cynthia)"
 run= [
-"sudo -u mar podman build . -t strawmelonjuice-site --network=host",
-"sudo -u mar podman run -d --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
+"docker build . -t strawmelonjuice-site --network=host",
+"docker run -d --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
 ]
 dir = "strawmelonjuice-site"
 
 [tasks.site-stop]
 description="Stop strawmelonjuice site (Podman/Cynthia)"
-run = ["sudo -u mar podman kill strawmelonjuice-site","podman rmi strawmelonjuice-site:latest"]
+run = ["docker kill strawmelonjuice-site","docker rmi strawmelonjuice-site:latest"]
 
 [tasks.site-restart]
 description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
