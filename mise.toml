@@ -76,13 +76,13 @@ run = [
 description="Start strawmelonjuice site (Podman/Cynthia)"
 run= [
 "docker build . -t strawmelonjuice-site --network=host",
-"docker run -d --restart unless-stopped --rm -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
+"docker run -d --restart unless-stopped -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
 ]
 dir = "strawmelonjuice-site"
 
 [tasks.site-stop]
 description="Stop strawmelonjuice site (Podman/Cynthia)"
-run = ["docker kill strawmelonjuice-site","docker rmi strawmelonjuice-site:latest"]
+run = ["docker kill strawmelonjuice-site","docker rm strawmelonjuice-site:latest","docker rmi strawmelonjuice-site:latest"]
 
 [tasks.site-restart]
 description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
