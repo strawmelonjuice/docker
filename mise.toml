@@ -86,7 +86,7 @@ dir = "strawmelonjuice-site"
 
 [tasks.site-stop]
 description="Stop strawmelonjuice site (Podman/Cynthia)"
-run = ["sudo -u mar podman stop strawmelonjuice-site","podman rmi strawmelonjuice-site:latest"]
+run = ["sudo -u mar podman kill strawmelonjuice-site","podman rmi strawmelonjuice-site:latest"]
 
 [tasks.site-restart]
 description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
