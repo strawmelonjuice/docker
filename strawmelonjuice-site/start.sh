@@ -2,7 +2,8 @@
 
 echo "Fetching site files..."
 rm -rf ./site
-git clone https://github.com/strawmelonjuice/strawmelonjuice-site ./site
+git clone https://codeberg.org/strawmelonjuice/site ./site
+git -C ./site remote set-url origin https://forge.strawmelonjuice.com/strawmelonjuice/site.git
 
 if [ ! -f "./cynthiaweb-mini" ]; then
   echo "cynthiaweb-mini not found, installing..."
