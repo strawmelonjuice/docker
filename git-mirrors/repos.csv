@@ -1,4 +1,8 @@
 # Source,Target
+
+## From my forge to Codeberg: My site
+git@git.strawmelonjuice.com:strawmelonjuice/site.git,git@codeberg.org:strawmelonjuice/site.git
+
 ## From Codeberg to my personal forge: Lumina
 git@codeberg.org:strawmelonjuice/Lumina.git,git@git.strawmelonjuice.com:strawmelonjuice/Lumina.git
 
