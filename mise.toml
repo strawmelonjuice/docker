@@ -1,6 +1,10 @@
 [settings]
 yes = true
 
+[env]
+SITE_IMAGE = "strawmelonjuice-site"
+SITE_CONTAINER = "strawmelonjuice-site"
+
 [tasks.all-start]
 description = "Start all services"
 run = [
@@ -75,14 +79,19 @@ run = [
 [tasks.site-start]
 description="Start strawmelonjuice site (Podman/Cynthia)"
 run= [
-"docker build . -t strawmelonjuice-site --network=host",
-"docker run -d --restart unless-stopped -p 3033:8080 --name strawmelonjuice-site strawmelonjuice-site:latest"
+"docker build . -t {{env.SITE_IMAGE}} --network=host",
+"docker run -d --restart unless-stopped -p 3033:8080 --name {{env.SITE_CONTAINER}} {{env.SITE_IMAGE}}:latest"
 ]
 dir = "strawmelonjuice-site"
 
 [tasks.site-stop]
 description="Stop strawmelonjuice site (Podman/Cynthia)"
-run = ["docker kill strawmelonjuice-site","docker rm strawmelonjuice-site:latest","docker rmi strawmelonjuice-site:latest"]
+run = [
+    "docker stop {{env.SITE_CONTAINER}} || true",
+    "docker rm {{env.SITE_CONTAINER}} || true",
+    "docker rmi {{env.SITE_IMAGE}}:latest || true"
+]
+dir = "strawmelonjuice-site"
 
 [tasks.site-restart]
 description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
