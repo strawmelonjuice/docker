@@ -23,7 +23,7 @@ fi
   while true; do
     sleep 300
     echo "Checking for site updates..."
-    cd ./site && git pull && cd ..
+    git -C ./site pull
   done
 ) &
 
