@@ -3,7 +3,10 @@
 ## From my forge to Codeberg: My site
 git@git.strawmelonjuice.com:strawmelonjuice/site.git,git@codeberg.org:strawmelonjuice/site.git
 
-## From Codeberg to my personal forge: Lumina
+# From my personal forge to Codeberg: SweetnHouse
+git@git.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
+
+# From Codeberg to my personal forge: Lumina
 git@codeberg.org:strawmelonjuice/Lumina.git,git@git.strawmelonjuice.com:strawmelonjuice/Lumina.git
 
 ## From Codeberg to Tangled (Nuv's knot): Lumina
