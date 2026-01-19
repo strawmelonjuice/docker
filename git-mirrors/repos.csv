@@ -1,42 +1,34 @@
 # Source,Target
 
 ## From my forge to Codeberg: My site
-git@git.strawmelonjuice.com:strawmelonjuice/site.git,git@codeberg.org:strawmelonjuice/site.git
+git@forge.strawmelonjuice.com:strawmelonjuice/site.git,git@codeberg.org:strawmelonjuice/site.git
 
 # From my personal forge to Codeberg: SweetnHouse
-git@git.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
+git@forge.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
 
-# From Codeberg to my personal forge: Lumina
-git@codeberg.org:strawmelonjuice/Lumina.git,git@git.strawmelonjuice.com:strawmelonjuice/Lumina.git
+# From my personal forge to Codeberg: Lumina
+git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@codeberg.org:strawmelonjuice/Lumina.git
 
 ## From Codeberg to Tangled (Nuv's knot): Lumina
 git@codeberg.org:strawmelonjuice/Lumina.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina
 
 ## From my personal forge to GitHub: Lumina
-https://git.strawmelonjuice.com/strawmelonjuice/lumina.git,git@github.com:strawmelonjuice/lumina.git
+git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@github.com:strawmelonjuice/lumina.git
 
 ## From my personal forge to Codeberg: Strawmediajuice
-https://git.strawmelonjuice.com/strawmelonjuice/strawmediajuice.git,git@codeberg.org:strawmelonjuice/strawmediajuice.git
+git@forge.strawmelonjuice.com:strawmelonjuice/strawmediajuice.git,git@codeberg.org:strawmelonjuice/strawmediajuice.git
 
 ## From my personal forge to Codeberg: Strawmelonservices (this repo.)
-https://git.strawmelonjuice.com/strawmelonjuice/docker.git,git@codeberg.org:strawmelonjuice/docker.git
+git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@codeberg.org:strawmelonjuice/docker.git
 
 ## From my personal forge to GitHub: Strawmelonservices (this repo.)
-https://git.strawmelonjuice.com/strawmelonjuice/docker.git,git@github.com:strawmelonjuice/docker.git
+git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@github.com:strawmelonjuice/docker.git
 
 ## From my personal forge to Codeberg: dotfiles
-https://git.strawmelonjuice.com/strawmelonjuice/dotfiles.git,git@codeberg.org:strawmelonjuice/dotfiles.git
+git@forge.strawmelonjuice.com:strawmelonjuice/dotfiles.git,git@codeberg.org:strawmelonjuice/dotfiles.git
 
 ## From my personal forge to GitHub: dotfiles
-https://git.strawmelonjuice.com/strawmelonjuice/dotfiles.git,git@github.com:strawmelonjuice/dotfiles.git
-
-
-## From Codeberg to my personal forge: fruittools
-git@codeberg.org:strawmelonjuice/fruittools.git,git@git.strawmelonjuice.com:strawmelonjuice/fruittools.git
-
-## From Codeberg to GitHub: fruittools
-git@codeberg.org:strawmelonjuice/fruittools.git,git@github.com:strawmelonjuice/fruittools.git
-
+git@forge.strawmelonjuice.com:strawmelonjuice/dotfiles.git,git@github.com:strawmelonjuice/dotfiles.git
 
 ## From my personal forge to GitHub: ranger among critters
-https://git.strawmelonjuice.com/strawmelonjuice/ranger-among-critters.git,git@github.com:strawmelonjuice/ranger-among-critters.git
+git@forge.strawmelonjuice.com:strawmelonjuice/ranger-among-critters.git,git@github.com:strawmelonjuice/ranger-among-critters.git
