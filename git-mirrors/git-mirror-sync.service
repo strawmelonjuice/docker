@@ -1,0 +1,15 @@
+# /etc/systemd/system/git-mirror-sync.service
+[Unit]
+Description=Git Mirror Sync Service
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/docker/git-mirrors
+ExecStart=/bin/bash /root/docker/git-mirrors/mirror.sh
+Restart=always
+RestartSec=30
+User=root
+
+[Install]
+WantedBy=multi-user.target

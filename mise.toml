@@ -77,24 +77,21 @@ run = [
 ]
 
 [tasks.site-start]
-description="Start strawmelonjuice site (Podman/Cynthia)"
+description="Start strawmelonjuice site (systemd/Cynthia/nginx)"
 run= [
-"docker build . -t {{env.SITE_IMAGE}} --network=host",
-"docker run -d --restart unless-stopped -p 3033:8080 --name {{env.SITE_CONTAINER}} {{env.SITE_IMAGE}}:latest"
+  "systemctl start site-gen.service"
 ]
 dir = "strawmelonjuice-site"
 
 [tasks.site-stop]
-description="Stop strawmelonjuice site (Podman/Cynthia)"
+description="Stop strawmelonjuice site (systemd/Cynthia/nginx)"
 run = [
-    "docker stop {{env.SITE_CONTAINER}} || true",
-    "docker rm {{env.SITE_CONTAINER}} || true",
-    "docker rmi {{env.SITE_IMAGE}}:latest || true"
+    "systemctl stop site-gen.service"
 ]
 dir = "strawmelonjuice-site"
 
 [tasks.site-restart]
-description = "Stop and restart strawmelonjuice site (Podman/Cynthia)"
+description = "Stop and restart strawmelonjuice site (systemd/Cynthia/nginx)"
 run = [
 { task = "site-stop" },
   { task = "site-start" },
