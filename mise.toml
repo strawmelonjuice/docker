@@ -101,6 +101,7 @@ run = [
 ]
 
 [tasks.site-generate]
+tools   = { bun = "latest" }
 description = "Generate strawmelonjuice site only if changes exist"
 run = [
   """
