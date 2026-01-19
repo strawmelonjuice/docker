@@ -134,7 +134,7 @@ fi
   LOCAL=$(git rev-parse HEAD)
   REMOTE=$(git rev-parse @{u})
 
-  if [ "$LOCAL" != "$REMOTE" ]; then
+  if [ "$LOCAL" != "$REMOTE" ] || [ ! -d "./out" ]; then
     echo "Changes detected! Regenerating site..."
     git reset --hard @{u}
     ../cynthiaweb-mini static
