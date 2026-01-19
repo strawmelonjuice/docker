@@ -2,6 +2,7 @@
 **/.env
 strawmelonjuice-site/source
 strawmelonjuice-site/out
+strawmelonjuice-site/build
 strawmelonjuice-site/cynthiaweb-mini
 .vscode/
 .idea/
