@@ -3,6 +3,10 @@
 ## From my forge to Codeberg: My site
 git@forge.strawmelonjuice.com:strawmelonjuice/site.git,git@codeberg.org:strawmelonjuice/site.git
 
+## From my forge to Codeberg: Cynthia Full and config-formats
+git@forge.strawmelonjuice.com:CynthiaWebsiteEngine/Full.git,git@codeberg.org:CynthiaWebsiteEngine/Full.git
+git@forge.strawmelonjuice.com:CynthiaWebsiteEngine/config-formats.git,git@codeberg.org:CynthiaWebsiteEngine/config-formats.git
+
 # From my personal forge to Codeberg: SweetnHouse
 git@forge.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
 
