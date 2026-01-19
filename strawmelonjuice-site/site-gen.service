@@ -4,6 +4,6 @@ Description=Run Cynthia Site Generation
 
 [Service]
 Type=oneshot
-User=mar
+User=root
 WorkingDirectory=/root/docker/
-ExecStart=/usr/local/bin/mise run site-generate
+ExecStart=/usr/bin/mise run site-generate
