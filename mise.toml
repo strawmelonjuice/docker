@@ -99,3 +99,49 @@ run = [
 { task = "site-stop" },
   { task = "site-start" },
 ]
+
+[tasks.site-generate]
+description = "Generate strawmelonjuice site only if changes exist"
+run = [
+  """
+  # Check and install cynthiaweb-mini if not present
+  if [ ! -f "./cynthiaweb-mini" ]; then
+  echo "cynthiaweb-mini not found, installing..."
+  curl -L -o cynthiaweb-mini-weekly.tgz https://github.com/strawmelonjuice/Mini-strawmelonjuice.com/releases/download/weekly-build/cynthiaweb-mini-weekly.tgz
+  mkdir -p build
+  tar -xzf cynthiaweb-mini-weekly.tgz -C build
+  bun build --compile build/dist/cynthia_websites_mini_server.js --outfile ./cynthiaweb-mini
+  chmod +x ./cynthiaweb-mini
+  rm cynthiaweb-mini-weekly.tgz
+  rm -rf build
+  echo "cynthiaweb-mini installed successfully."
+else
+  echo "✓ cynthiaweb-mini is already installed."
+fi
+  """,
+  """
+  # 1. Initialize directory if it doesn't exist
+  if [ ! -d "./source" ]; then
+    git clone https://codeberg.org/strawmelonjuice/site ./source
+    git -C ./source remote set-url origin https://forge.strawmelonjuice.com/strawmelonjuice/site.git
+  fi
+
+  # 2. Check for remote changes
+  cd ./source
+  git fetch origin main -q
+  
+  LOCAL=$(git rev-parse HEAD)
+  REMOTE=$(git rev-parse @{u})
+
+  if [ "$LOCAL" != "$REMOTE" ]; then
+    echo "Changes detected! Regenerating site..."
+    git reset --hard @{u}
+    ../cynthiaweb-mini static
+    rsync -a --delete ./out/ ../out/
+    echo "Site updated successfully."
+  else
+    echo "No changes found. Skipping generation."
+  fi
+  """
+]
+dir = "strawmelonjuice-site"
