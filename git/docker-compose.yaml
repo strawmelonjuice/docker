@@ -6,7 +6,7 @@ networks:
 services:
 # git setup ----------------------------------------------------------
   git:
-    image: codeberg.org/forgejo/forgejo:12
+    image: codeberg.org/forgejo/forgejo:14
     command: >-
       bash -c '
       /usr/bin/s6-svscan /etc/s6 &
