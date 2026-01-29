@@ -10,6 +10,9 @@ git@forge.strawmelonjuice.com:CynthiaWebsiteEngine/config-formats.git,git@codebe
 # From my personal forge to Codeberg: SweetnHouse
 git@forge.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
 
+# From my personal forge to Codeberg: Chilp
+git@forge.strawmelonjuice.com:strawmelonjuice/chilp.git,git@codeberg.org/strawmelonjuice/chilp_backup.git
+
 # From my personal forge to Codeberg: Lumina
 git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@codeberg.org:strawmelonjuice/Lumina.git
 
