@@ -31,10 +31,12 @@ git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@codeberg.org:strawm
 ## From my personal forge to GitHub: Strawmelonservices (this repo.)
 git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@github.com:strawmelonjuice/docker.git
 
-## From my personal forge to Codeberg: dotfiles
+## From my personal forge to Codeberg: dotfiles and nixfiles
+git@forge.strawmelonjuice.com:strawmelonjuice/nix.git,git@codeberg.org:strawmelonjuice/nix.git
 git@forge.strawmelonjuice.com:strawmelonjuice/dotfiles.git,git@codeberg.org:strawmelonjuice/dotfiles.git
 
-## From my personal forge to GitHub: dotfiles
+## From my personal forge to GitHub: dotfiles and nixfiles
+git@forge.strawmelonjuice.com:strawmelonjuice/nix.git,git@github.com:strawmelonjuice/nix.git
 git@forge.strawmelonjuice.com:strawmelonjuice/dotfiles.git,git@github.com:strawmelonjuice/dotfiles.git
 
 ## From my personal forge to GitHub: ranger among critters
