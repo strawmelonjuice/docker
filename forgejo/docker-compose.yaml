@@ -42,7 +42,7 @@ services:
             - db
 
     db:
-        # Keeping 14 because the Forgejo is subject to replacement by a tangled.sh knot in the future.
+        # Keeping 14 because the Forgejo is subject to replacement by a tangled.org knot in the future.
         image: postgres:14
         restart: unless-stopped
         environment:

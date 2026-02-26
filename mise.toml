@@ -74,12 +74,12 @@ run = [
 ]
 
 [tasks.forge-start]
-description="Import CI images and start forgejo and runners. (docker)"
+description="Start forgejo (docker)"
 dir = "forgejo"
 run = "docker compose up -d"
 
 [tasks.forge-stop]
-description = "Stop forgejo and runners (docker)"
+description = "Stop forgejo (docker)"
 run = "docker compose down"
 dir = "forgejo"
 
@@ -88,6 +88,23 @@ description = "Stop and restart forgejo service (docker)"
 run = [
 { task = "forge-stop" },
   { task = "forge-start" },
+]
+
+[tasks.knot-start]
+description="Start tangled.org knot (docker)"
+dir = "tangled"
+run = "docker compose up -d"
+
+[tasks.knot-stop]
+description = "Stop tangled.org knot (docker)"
+run = "docker compose down"
+dir = "tangled"
+
+[tasks.knot-restart]
+description = "Stop and restart tangled.org knot (docker)"
+run = [
+{ task = "knot-stop" },
+  { task = "knot-start" },
 ]
 
 [tasks.site-start]

@@ -1,15 +1,29 @@
+# redirect icons to strawmediajuice
+(icon_redirect) {
+    redir /favicon.ico https://strawmelonjuice.com/assets/site_icon.png permanent
+    redir /favicon.png https://strawmelonjuice.com/assets/site_icon.png permanent
+    redir /assets/img/favicon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
+    redir /assets/img/favicon.png https://strawmelonjuice.com/assets/site_icon.png permanent
+    redir /assets/img/site_icon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
+    redir /assets/img/logo.svg https://strawmelonjuice.com/assets/site_icon.png permanent
+}
+
 # redirect from git -> forge
 git.strawmelonjuice.com {
     redir https://forge.strawmelonjuice.com{uri} permanent
 }
 
 forge.strawmelonjuice.com {
-    # redirect icon to strawmediajuice
-    redir /assets/img/favicon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
-    redir /assets/img/site_icon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
+    import icon_redirect
 
     # proxy to forgejo
     reverse_proxy forge:3000
+}
+
+code.strawmelonjuice.com {
+    import icon_redirect
+
+    reverse_proxy tangled:5555
 }
 
 files-shared.strawmelonjuice.com {
@@ -20,6 +34,13 @@ files-shared.strawmelonjuice.com {
     reverse_proxy strawmedia:3022
 }
 
+media.strawmelonjuice.com {
+    # request_body {
+    #     max_size 3GB
+    # }
+
+    reverse_proxy strawmedia:3022
+}
 strawmelonjuice.com {
 
     # set site root
