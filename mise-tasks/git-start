@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-#MISE description="Import CI images and start forgejo and runners. (docker)"
-#MISE dir="git"
-set -euxo pipefail
-
-
-
-# Start docker-compose
-docker compose up -d

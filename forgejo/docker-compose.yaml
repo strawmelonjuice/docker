@@ -1,8 +1,10 @@
 networks:
     forgejo:
+    caddys:
+        external: true
 
 services:
-    git:
+    forge:
         image: codeberg.org/forgejo/forgejo:14
         command: >-
             bash -c '
@@ -13,7 +15,7 @@ services:
             sleep infinity
             '
         restart: unless-stopped
-        container_name: git
+        container_name: forge
         environment:
             - FORGEJO__database__DB_TYPE=postgres
             - FORGEJO__database__HOST=db:5432
@@ -29,9 +31,9 @@ services:
             - ROOT_PASSWORD=${ROOT_PASSWORD}
         networks:
             - forgejo
+            - caddys
         ports:
             - "222:22"
-            - "3000:3000"
         volumes:
             - ../data/forgejo/forge:/data
             - /etc/timezone:/etc/timezone:ro

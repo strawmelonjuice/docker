@@ -1,0 +1,24 @@
+services:
+    caddy:
+        image: caddy:2
+        container_name: caddy
+        restart: unless-stopped
+        networks:
+            - caddys
+        ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
+        volumes:
+            - caddy_data:/data
+            - caddy_config:/config
+            - ./conf:/etc/caddy
+            - ../strawmelonjuice-site/out:/srv/strawmelonjuice-site/
+
+volumes:
+    caddy_data:
+    caddy_config:
+networks:
+    caddys:
+        name: caddys
+        driver: bridge

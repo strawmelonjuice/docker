@@ -8,22 +8,40 @@ SITE_CONTAINER = "strawmelonjuice-site"
 [tasks.all-start]
 description = "Start all services"
 run = [
-  { tasks = ["git-start", "git-mirror-sync-start", "strawmediajuice-start", "site-start"] },
+  { tasks = ["caddy-start","forge-start", "git-mirror-sync-start", "strawmediajuice-start", "site-start"] },
 ]
 
 [tasks.all-stop]
 description = "Stop all services"
 run = [
-  { tasks = ["git-stop", "git-mirror-sync-stop", "strawmediajuice-stop", "site-stop"] },
+  { tasks = ["caddy-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop", "site-stop"] },
 ]
 
 [tasks.all-restart]
 description = "Stop and restart all services"
 run = [
-  { tasks = ["git-restart", "git-mirror-sync-restart", "strawmediajuice-restart","site-restart"] },
+  { tasks = ["caddy-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart","site-restart"] },
+]
+
+[tasks.caddy-start]
+description = "Start Caddy (Docker)"
+run = "docker compose up -d"
+dir = "caddy"
+
+[tasks.caddy-stop]
+description = "Stop Caddy (Docker)"
+run = "docker compose down"
+dir = "caddy"
+
+[tasks.caddy-restart]
+description = "Stop and restart Caddy (docker)"
+run = [
+{ task = "caddy-stop" },
+  { task = "caddy-start" },
 ]
 
 [tasks.strawmediajuice-start]
+wait_for="forge-start"
 description = "Start strawmediajuice service (docker)"
 run = "docker compose up -d"
 dir = "strawmediajuice"
@@ -55,16 +73,21 @@ run = [
   { task = "git-mirror-sync-start" },
 ]
 
-[tasks.git-stop]
+[tasks.forge-start]
+description="Import CI images and start forgejo and runners. (docker)"
+dir = "forgejo"
+run = "docker compose up -d"
+
+[tasks.forge-stop]
 description = "Stop forgejo and runners (docker)"
 run = "docker compose down"
-dir = "git"
+dir = "forgejo"
 
-[tasks.git-restart]
+[tasks.forge-restart]
 description = "Stop and restart forgejo service (docker)"
 run = [
-{ task = "git-stop" },
-  { task = "git-start" },
+{ task = "forge-stop" },
+  { task = "forge-start" },
 ]
 
 [tasks.site-start]
@@ -112,13 +135,14 @@ fi
   # 1. Initialize directory if it doesn't exist
   if [ ! -d "./source" ]; then
     git clone https://codeberg.org/strawmelonjuice/site ./source
-    git -C ./source remote set-url origin https://forge.strawmelonjuice.com/strawmelonjuice/site.git
+    sleep 15s
+    git -C ./source remote set-url origin git@forge.strawmelonjuice.com:strawmelonjuice/site.git
   fi
 
   # 2. Check for remote changes
   cd ./source
   git fetch origin main -q
-  
+
   LOCAL=$(git rev-parse HEAD)
   REMOTE=$(git rev-parse @{u})
 

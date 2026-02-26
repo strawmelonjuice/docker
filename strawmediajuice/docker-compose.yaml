@@ -4,7 +4,10 @@ services:
         restart: unless-stopped
         environment:
             - PORT=3022
-        ports:
-            - "3022:3022"
+        networks:
+            - caddys
         volumes:
             - ../data/strawmediajuice:/app/data/
+networks:
+    caddys:
+        external: true
