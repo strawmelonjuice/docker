@@ -91,16 +91,19 @@ run = [
 ]
 
 [tasks.knot-start]
+alias="tangled-start"
 description="Start tangled.org knot (docker)"
 dir = "tangled"
 run = "docker compose up -d"
 
 [tasks.knot-stop]
+alias="tangled-stop"
 description = "Stop tangled.org knot (docker)"
 run = "docker compose down"
 dir = "tangled"
 
 [tasks.knot-restart]
+alias="tangled-restart"
 description = "Stop and restart tangled.org knot (docker)"
 run = [
 { task = "knot-stop" },

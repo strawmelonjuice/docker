@@ -13,11 +13,15 @@ git@forge.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:s
 # From my personal forge to Codeberg: Chilp
 git@forge.strawmelonjuice.com:strawmelonjuice/chilp.git,git@codeberg.org/strawmelonjuice/chilp_backup.git
 
+# From my personal forge to my Tangled knot: Lumina
+git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@code.strawmelonjuice.com:strawmelonjuice.com/Lumina
+
 # From my personal forge to Codeberg: Lumina
 git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@codeberg.org:strawmelonjuice/Lumina.git
 
 ## From Codeberg to Tangled (Nuv's knot): Lumina
-git@codeberg.org:strawmelonjuice/Lumina.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina
+git@codeberg.org:strawmelonjuice/Lumina.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina-mirror
+
 
 ## From my personal forge to GitHub: Lumina
 git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@github.com:strawmelonjuice/lumina.git

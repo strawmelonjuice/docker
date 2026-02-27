@@ -10,14 +10,11 @@ services:
             - "443:443"
             - "443:443/udp"
         volumes:
-            - caddy_data:/data
-            - caddy_config:/config
+            - ../data/caddy_data:/data
+            - ../data/caddy_config:/config
             - ./conf:/etc/caddy
             - ../strawmelonjuice-site/out:/srv/strawmelonjuice-site/
 
-volumes:
-    caddy_data:
-    caddy_config:
 networks:
     caddys:
         name: caddys

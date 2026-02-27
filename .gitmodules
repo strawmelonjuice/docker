@@ -1,0 +1,3 @@
+[submodule "tangled/knot-docker"]
+	path = tangled/knot-docker
+	url = https://tangled.sh/@tangled.sh/knot-docker

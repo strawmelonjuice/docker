@@ -41,6 +41,11 @@ media.strawmelonjuice.com {
 
     reverse_proxy strawmedia:3022
 }
+
+strawmelonjuice.com/.well-known/atproto-did {
+  respond "did:plc:jgtfsmv25thfs4zmydtbccnn"
+}
+
 strawmelonjuice.com {
 
     # set site root

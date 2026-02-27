@@ -3,19 +3,29 @@ networks:
         external: true
 services:
     tangled:
-        image: tngl/knot:v1.10.0-alpha
+        # image: tngl/knot:v1.10.0-alpha
+        build:
+            context: ./knot-docker/
+            args: { TAG: "v1.11.0-alpha" }
+        container_name: tangled
         environment:
             KNOT_SERVER_HOSTNAME: code.strawmelonjuice.com
             KNOT_SERVER_OWNER: "did:plc:jgtfsmv25thfs4zmydtbccnn"
             KNOT_SERVER_DB_PATH: /app/knotserver.db
             KNOT_REPO_SCAN_PATH: /home/git/repositories
-            KNOT_SERVER_INTERNAL_LISTEN_ADDR: localhost:5444
+            KNOT_SERVER_INTERNAL_LISTEN_ADDR: "127.0.0.1:5444"
+            KNOT_SERVER_LISTEN_ADDR: "0.0.0.0:5555"
+
         volumes:
             - ../data/tangled/keys:/etc/ssh/keys
-            - ../data/tangled/repositories:/home/git/repositories
+            - ../data/tangled/git:/home/git
             - ../data/tangled/server:/app
         ports:
             - "2222:22"
-        restart: always
+            # - "5555:5555"
+        restart: unless-stopped
         networks:
-            - caddys
+            caddys:
+                aliases:
+                    - tangled
+                    - code.strawmelonjuice.com
