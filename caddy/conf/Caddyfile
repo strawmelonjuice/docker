@@ -52,12 +52,32 @@ media.strawmelonjuice.com {
     reverse_proxy strawmedia:3022
 }
 
-strawmelonjuice.com/.well-known/atproto-did {
-  respond "did:plc:jgtfsmv25thfs4zmydtbccnn"
-}
 
 strawmelonjuice.com {
+    # ===================------ ATPROTO ------===================
+    # Just the well-known did file lol
+    handle_path /.well-known/atproto-did {
+        respond "did:plc:jgtfsmv25thfs4zmydtbccnn"
+    }
 
+    # ================---- Matrix Homeserver ----================
+    # 1. Provide 'Well-Known' delegation for other servers and clients
+    handle /.well-known/matrix/server {
+        header Access-Control-Allow-Origin "*"
+        header Content-Type "application/json"
+        respond `{"m.server": "strawmelonjuice.com:443"}`
+    }
+
+    handle /.well-known/matrix/client {
+        header Access-Control-Allow-Origin "*"
+        header Content-Type "application/json"
+        respond `{"m.homeserver": {"base_url": "https://strawmelonjuice.com"}}`
+    }
+
+    reverse_proxy /_matrix/* matrix:8008
+    reverse_proxy /_synapse/client/* matrix:8008
+
+    # ===================------ My Site ------===================
     # set site root
     root /srv/strawmelonjuice-site/
 

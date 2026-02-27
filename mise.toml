@@ -8,19 +8,19 @@ SITE_CONTAINER = "strawmelonjuice-site"
 [tasks.all-start]
 description = "Start all services"
 run = [
-  { tasks = ["caddy-start","forge-start", "git-mirror-sync-start", "strawmediajuice-start", "site-start"] },
+  { tasks = ["caddy-start", "matrix-start", "forge-start", "git-mirror-sync-start", "strawmediajuice-start", "site-start"] },
 ]
 
 [tasks.all-stop]
 description = "Stop all services"
 run = [
-  { tasks = ["caddy-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop", "site-stop"] },
+  { tasks = ["caddy-stop","matrix-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop", "site-stop"] },
 ]
 
 [tasks.all-restart]
 description = "Stop and restart all services"
 run = [
-  { tasks = ["caddy-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart","site-restart"] },
+  { tasks = ["caddy-restart","matrix-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart","site-restart"] },
 ]
 
 [tasks.caddy-start]
@@ -178,3 +178,23 @@ fi
   """
 ]
 dir = "strawmelonjuice-site"
+
+[tasks.matrix-start]
+alias="synapse-start"
+description="Start Matrix homeserver (docker)"
+dir = "matrix"
+run = "docker compose up -d"
+
+[tasks.matrix-stop]
+alias="synapse-stop"
+description = "Stop Matrix homeserver (docker)"
+run = "docker compose down"
+dir = "matrix"
+
+[tasks.matrix-restart]
+alias="synapse-restart"
+description = "Stop and restart Matrix homeserver (docker)"
+run = [
+{ task = "matrix-stop" },
+  { task = "matrix-start" },
+]
