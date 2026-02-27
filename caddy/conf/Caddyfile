@@ -1,3 +1,11 @@
+{
+    log {
+        output file /var/log/caddy/access.log
+    }
+    email webmaster@strawmelonjuice.com
+}
+
+
 # redirect icons to strawmediajuice
 (icon_redirect) {
     redir /favicon.ico https://strawmelonjuice.com/assets/site_icon.png permanent
@@ -7,6 +15,8 @@
     redir /assets/img/site_icon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
     redir /assets/img/logo.svg https://strawmelonjuice.com/assets/site_icon.png permanent
 }
+
+
 
 # redirect from git -> forge
 git.strawmelonjuice.com {
