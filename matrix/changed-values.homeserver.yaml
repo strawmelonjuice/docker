@@ -19,3 +19,4 @@ retention:
 app_service_config_files:
     - /data/signal-registration.yaml
     - /data/whatsapp-registration.yaml
+    - /data/telegram-registration.yaml

@@ -38,6 +38,16 @@ services:
             - synapse
         volumes:
             - ../data/matrix/whatsapp:/data
+
+    mautrix-telegram:
+        container_name: mautrix-telegram
+        image: dock.mau.dev/mautrix/telegram:latest
+        restart: unless-stopped
+        networks:
+            - synapse
+        volumes:
+            - ../data/matrix/telegram:/data
+
     db:
         image: docker.io/library/postgres:16-alpine
         container_name: synapse-db
