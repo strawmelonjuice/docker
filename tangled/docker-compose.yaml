@@ -28,4 +28,3 @@ services:
             caddys:
                 aliases:
                     - tangled
-                    - code.strawmelonjuice.com
