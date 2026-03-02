@@ -21,7 +21,7 @@ services:
             - ../data/tangled/git:/home/git
             - ../data/tangled/server:/app
         ports:
-            - "2222:22"
+            - "54321:22"
             # - "5555:5555"
         restart: unless-stopped
         networks:
