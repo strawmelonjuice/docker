@@ -31,7 +31,6 @@ services:
             - ROOT_PASSWORD=${ROOT_PASSWORD}
         networks:
             - forgejo
-            - caddys
         ports:
             - "222:22"
         volumes:
@@ -42,7 +41,6 @@ services:
             - db
 
     db:
-        # Keeping 14 because the Forgejo is subject to replacement by a tangled.org knot in the future.
         image: postgres:14
         restart: unless-stopped
         environment:
@@ -53,3 +51,15 @@ services:
             - forgejo
         volumes:
             - ../data/forgejo/db:/var/lib/postgresql/data
+    anubis-forge:
+        image: ghcr.io/techarohq/anubis:latest
+        pull_policy: always
+        container_name: anubis-forge
+        environment:
+            BIND: ":3000"
+            DIFFICULTY: "6"
+            TARGET: http://forge:3000
+            WEBMASTER_EMAIL: webmaster@strawmelonjuice.com
+        networks:
+            - forgejo
+            - caddys

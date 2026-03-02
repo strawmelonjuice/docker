@@ -38,7 +38,9 @@ forge.strawmelonjuice.com {
 	import icon_redirect
 
 	# proxy to forgejo
-	reverse_proxy forge:3000
+	reverse_proxy anubis-forge:3000 {
+		header_up X-Real-Ip {remote_host}
+	}
 }
 
 files-shared.strawmelonjuice.com {
