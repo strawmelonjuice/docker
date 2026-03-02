@@ -54,6 +54,7 @@ services:
     anubis-forge:
         image: ghcr.io/techarohq/anubis:latest
         pull_policy: always
+        restart: unless-stopped
         container_name: anubis-forge
         environment:
             BIND: ":3000"
