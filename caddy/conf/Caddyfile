@@ -8,7 +8,7 @@
 
 # redirect icons to strawmediajuice
 (icon_redirect) {
-    redir /assets/site_icon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /assets/site_icon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
 	redir /favicon.ico https://strawmelonjuice.com/strawmelonjuice.png permanent
 	redir /favicon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
 	redir /assets/img/favicon.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
@@ -53,37 +53,35 @@ media.strawmelonjuice.com {
 
 strawmelonjuice.com {
 	# ===================------ ATPROTO ------===================
-	# Just the well-known did file lol
 	handle_path /.well-known/atproto-did {
 		respond "did:plc:jgtfsmv25thfs4zmydtbccnn"
 	}
 
 	# ================---- Matrix Homeserver ----================
-	# 1. Provide 'Well-Known' delegation for other servers and clients
-	handle /.well-known/matrix/server {
+	handle /.well-known/matrix/* {
 		header Access-Control-Allow-Origin "*"
 		header Content-Type "application/json"
-		respond `{"m.server": "strawmelonjuice.com:443"}`
+
+		# Using a Matcher inside the handle to respond differently
+		@server path /.well-known/matrix/server
+		respond @server `{"m.server": "strawmelonjuice.com:443"}`
+
+		@client path /.well-known/matrix/client
+		respond @client `{"m.homeserver": {"base_url": "https://strawmelonjuice.com"}}`
 	}
 
-	handle /.well-known/matrix/client {
-		header Access-Control-Allow-Origin "*"
-		header Content-Type "application/json"
-		respond `{"m.homeserver": {"base_url": "https://strawmelonjuice.com"}}`
-	}
-	handle_path /_matrix/* {
+	handle /_matrix/* {
 		reverse_proxy matrix:8008
 	}
-	handle_path /_synapse/client/* {
+
+	handle /_synapse/client/* {
 		reverse_proxy matrix:8008
 	}
 
 	# ===================------ My Site ------===================
-	# set site root
-	root /srv/strawmelonjuice-site/
-	file_server
-	# Host the strawmelonsite!
 	handle {
+		root * /srv/strawmelonjuice-site/
 		try_files {path} /index.html
+		file_server
 	}
 }
