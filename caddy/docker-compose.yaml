@@ -14,7 +14,7 @@ services:
             - ../data/caddy/config:/config
             - ../data/caddy/log:/var/log/caddy
             - ./conf:/etc/caddy
-            - ../strawmelonjuice-site/out:/srv/strawmelonjuice-site/
+            - ../strawmelonjuice-site/:/srv/strawmelonjuice-site/
 
 networks:
     caddys:

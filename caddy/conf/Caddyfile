@@ -8,25 +8,17 @@
 
 # redirect icons to strawmediajuice
 (icon_redirect) {
-	redir /favicon.ico https://strawmelonjuice.com/assets/site_icon.png permanent
-	redir /favicon.png https://strawmelonjuice.com/assets/site_icon.png permanent
-	redir /assets/img/favicon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
-	redir /assets/img/favicon.png https://strawmelonjuice.com/assets/site_icon.png permanent
-	redir /assets/img/site_icon.svg https://strawmelonjuice.com/assets/site_icon.png permanent
-	redir /assets/img/logo.svg https://strawmelonjuice.com/assets/site_icon.png permanent
+    redir /assets/site_icon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /favicon.ico https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /favicon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /assets/img/favicon.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /assets/img/favicon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /assets/img/site_icon.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
+	redir /assets/img/logo.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
 }
 code.strawmelonjuice.com {
 	import icon_redirect
-
-	handle {
-		reverse_proxy 172.21.0.5:5555 {
-			header_up Host {host}
-			header_up X-Real-IP {remote_ip}
-			transport http {
-				dial_timeout 2s
-			}
-		}
-	}
+	reverse_proxy 172.21.0.5:5555
 }
 
 # redirect from git -> forge
@@ -79,16 +71,19 @@ strawmelonjuice.com {
 		header Content-Type "application/json"
 		respond `{"m.homeserver": {"base_url": "https://strawmelonjuice.com"}}`
 	}
-
-	reverse_proxy /_matrix/* matrix:8008
-	reverse_proxy /_synapse/client/* matrix:8008
+	handle_path /_matrix/* {
+		reverse_proxy matrix:8008
+	}
+	handle_path /_synapse/client/* {
+		reverse_proxy matrix:8008
+	}
 
 	# ===================------ My Site ------===================
 	# set site root
 	root /srv/strawmelonjuice-site/
-
-	# try to access the file at {path} alternatively redirect to #{path}
-	# try_files {path} /#{path}
-
 	file_server
+	# Host the strawmelonsite!
+	handle {
+		try_files {path} /index.html
+	}
 }

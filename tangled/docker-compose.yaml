@@ -13,8 +13,8 @@ services:
             KNOT_SERVER_OWNER: "did:plc:jgtfsmv25thfs4zmydtbccnn"
             KNOT_SERVER_DB_PATH: /app/knotserver.db
             KNOT_REPO_SCAN_PATH: /home/git/repositories
-            KNOT_SERVER_INTERNAL_LISTEN_ADDR: "127.0.0.1:5444"
-            KNOT_SERVER_LISTEN_ADDR: "0.0.0.0:5555"
+            # KNOT_SERVER_INTERNAL_LISTEN_ADDR: "127.0.0.1:5444"
+            # KNOT_SERVER_LISTEN_ADDR: "0.0.0.0:5555"
 
         volumes:
             - ../data/tangled/keys:/etc/ssh/keys

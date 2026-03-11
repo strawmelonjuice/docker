@@ -1,9 +1,0 @@
-# /etc/systemd/system/site-gen.service
-[Unit]
-Description=Run Cynthia Site Generation
-
-[Service]
-Type=oneshot
-User=root
-WorkingDirectory=/root/docker/
-ExecStart=/usr/bin/mise run site-generate

@@ -1,9 +1,6 @@
 **/data/
 **/.env
-strawmelonjuice-site/source
-strawmelonjuice-site/out
-strawmelonjuice-site/build
-strawmelonjuice-site/cynthiaweb-mini
+strawmelonjuice-site/
 .vscode/
 .idea/
 *.log

@@ -1,26 +1,22 @@
 [settings]
 yes = true
 
-[env]
-SITE_IMAGE = "strawmelonjuice-site"
-SITE_CONTAINER = "strawmelonjuice-site"
-
 [tasks.all-start]
 description = "Start all services"
 run = [
-  { tasks = ["caddy-start", "matrix-start", "forge-start", "git-mirror-sync-start", "strawmediajuice-start", "site-start"] },
+  { tasks = ["caddy-start", "matrix-start", "forge-start", "git-mirror-sync-start", "strawmediajuice-start"] },
 ]
 
 [tasks.all-stop]
 description = "Stop all services"
 run = [
-  { tasks = ["caddy-stop","matrix-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop", "site-stop"] },
+  { tasks = ["caddy-stop","matrix-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop"] },
 ]
 
 [tasks.all-restart]
 description = "Stop and restart all services"
 run = [
-  { tasks = ["caddy-restart","matrix-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart","site-restart"] },
+  { tasks = ["caddy-restart","matrix-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart"] },
 ]
 
 [tasks.caddy-start]
@@ -109,75 +105,6 @@ run = [
 { task = "knot-stop" },
   { task = "knot-start" },
 ]
-
-[tasks.site-start]
-description="Start strawmelonjuice site (systemd/Cynthia/nginx)"
-run= [
-  "systemctl start site-gen.service"
-]
-dir = "strawmelonjuice-site"
-
-[tasks.site-stop]
-description="Stop strawmelonjuice site (systemd/Cynthia/nginx)"
-run = [
-    "systemctl stop site-gen.service"
-]
-dir = "strawmelonjuice-site"
-
-[tasks.site-restart]
-description = "Stop and restart strawmelonjuice site (systemd/Cynthia/nginx)"
-run = [
-{ task = "site-stop" },
-  { task = "site-start" },
-]
-
-[tasks.site-generate]
-tools   = { bun = "latest" }
-description = "Generate strawmelonjuice site only if changes exist"
-run = [
-  """
-  # Check and install cynthiaweb-mini if not present
-  if [ ! -f "./cynthiaweb-mini" ]; then
-  echo "cynthiaweb-mini not found, installing..."
-  curl -L -o cynthiaweb-mini-weekly.tgz https://github.com/strawmelonjuice/Mini-strawmelonjuice.com/releases/download/weekly-build/cynthiaweb-mini-weekly.tgz
-  mkdir -p build
-  tar -xzf cynthiaweb-mini-weekly.tgz -C build
-  bun build --compile build/dist/cynthia_websites_mini_server.js --outfile ./cynthiaweb-mini
-  chmod +x ./cynthiaweb-mini
-  rm cynthiaweb-mini-weekly.tgz
-  rm -rf build
-  echo "cynthiaweb-mini installed successfully."
-else
-  echo "✓ cynthiaweb-mini is already installed."
-fi
-  """,
-  """
-  # 1. Initialize directory if it doesn't exist
-  if [ ! -d "./source" ]; then
-    git clone https://codeberg.org/strawmelonjuice/site ./source
-    sleep 15s
-    git -C ./source remote set-url origin git@forge.strawmelonjuice.com:strawmelonjuice/site.git
-  fi
-
-  # 2. Check for remote changes
-  cd ./source
-  git fetch origin main -q
-
-  LOCAL=$(git rev-parse HEAD)
-  REMOTE=$(git rev-parse @{u})
-
-  if [ "$LOCAL" != "$REMOTE" ] || [ ! -d "./out" ]; then
-    echo "Changes detected! Regenerating site..."
-    git reset --hard @{u}
-    ../cynthiaweb-mini static
-    rsync -a --delete ./out/ ../out/
-    echo "Site updated successfully."
-  else
-    echo "No changes found. Skipping generation."
-  fi
-  """
-]
-dir = "strawmelonjuice-site"
 
 [tasks.matrix-start]
 alias="synapse-start"
