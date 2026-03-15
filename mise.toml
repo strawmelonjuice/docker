@@ -8,21 +8,25 @@ run = [
 ]
 
 [tasks.all-stop]
-description = "Stop all services"
+description = "Stop all services. Does not stop caddy."
 run = [
-  { tasks = ["caddy-stop","matrix-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop"] },
+  { tasks = ["matrix-stop","forge-stop", "git-mirror-sync-stop", "strawmediajuice-stop"] },
 ]
 
 [tasks.all-restart]
-description = "Stop and restart all services"
+description = "Stop and restart all services. Does not stop caddy."
 run = [
-  { tasks = ["caddy-restart","matrix-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart"] },
+  { tasks = ["caddy-start","matrix-restart","forge-restart", "git-mirror-sync-restart", "strawmediajuice-restart"] },
 ]
 
 [tasks.caddy-start]
 description = "Start Caddy (Docker)"
 run = "docker compose up -d"
 dir = "caddy"
+
+[tasks.caddy-reload]
+description = "Send caddy a reload command."
+run = "docker exec -it caddy caddy reload --config /etc/caddy/Caddyfile"
 
 [tasks.caddy-stop]
 description = "Stop Caddy (Docker)"

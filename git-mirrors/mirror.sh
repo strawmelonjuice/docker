@@ -3,12 +3,8 @@
 # A simple script to pull changes from one Git repo and push to another.
 # The script reads source and target URLs from a CSV file.
 
-# Use a loop to run the sync process indefinitely
 
-git pull
 
-echo "Git Sync Script Initialized with CSV Input:"
-cat repos.csv
 echo "\n"
 
 while true; do
@@ -19,6 +15,7 @@ while true; do
 
     # Read the CSV file line by line
     while IFS=',' read -r source_repo target_repo; do
+        git pull
         # Skip empty lines and comment lines
         if [[ -z "$source_repo" || "$source_repo" =~ ^# ]]; then
             continue

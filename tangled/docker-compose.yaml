@@ -1,3 +1,5 @@
+volumes:
+    tangled_keys:
 networks:
     caddys:
         external: true
@@ -9,7 +11,7 @@ services:
             args: { TAG: "v1.11.0-alpha" }
         container_name: tangled
         environment:
-            KNOT_SERVER_HOSTNAME: code.strawmelonjuice.com
+            KNOT_SERVER_HOSTNAME: knot.strawmelonjuice.com
             KNOT_SERVER_OWNER: "did:plc:jgtfsmv25thfs4zmydtbccnn"
             KNOT_SERVER_DB_PATH: /app/knotserver.db
             KNOT_REPO_SCAN_PATH: /home/git/repositories
@@ -17,11 +19,11 @@ services:
             # KNOT_SERVER_LISTEN_ADDR: "0.0.0.0:5555"
 
         volumes:
-            - ../data/tangled/keys:/etc/ssh/keys
+            - tangled_keys:/etc/ssh/keys
             - ../data/tangled/git:/home/git
             - ../data/tangled/server:/app
         ports:
-            - "54321:22"
+            - "2222:22"
             # - "5555:5555"
         restart: unless-stopped
         networks:

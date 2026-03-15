@@ -1,10 +1,7 @@
 {
-	log {
-		output file /var/log/caddy/access.log
-		format console
-	}
 	email webmaster@strawmelonjuice.com
 }
+
 
 # redirect icons to strawmediajuice
 (icon_redirect) {
@@ -16,9 +13,10 @@
 	redir /assets/img/site_icon.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
 	redir /assets/img/logo.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
 }
-code.strawmelonjuice.com {
-	import icon_redirect
-	reverse_proxy 172.21.0.5:5555
+
+
+knot.strawmelonjuice.com {
+	reverse_proxy tangled:5555
 }
 
 # redirect from git -> forge
@@ -33,14 +31,6 @@ forge.strawmelonjuice.com {
 	reverse_proxy anubis-forge:3000 {
 		header_up X-Real-Ip {remote_host}
 	}
-}
-
-files-shared.strawmelonjuice.com {
-	# request_body {
-	#     max_size 3GB
-	# }
-
-	reverse_proxy strawmedia:3022
 }
 
 media.strawmelonjuice.com {
