@@ -1,47 +1,28 @@
 # Source,Target
 
-## From my forge to Codeberg: My site
-git@forge.strawmelonjuice.com:strawmelonjuice/site.git,git@codeberg.org:strawmelonjuice/site.git
+# My Knot => Codeberg: SweetnHouse
+knot.strawmelonjuice.com:strawmelonjuice.com/sweetnhouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
 
-## From my forge to Codeberg: Cynthia Full and config-formats
-git@forge.strawmelonjuice.com:CynthiaWebsiteEngine/Full.git,git@codeberg.org:CynthiaWebsiteEngine/Full.git
-git@forge.strawmelonjuice.com:CynthiaWebsiteEngine/config-formats.git,git@codeberg.org:CynthiaWebsiteEngine/config-formats.git
+# Lumina is already mirrored through Forgejo-builtin-mirroring on the strawmelonjuice.
+# Defined here:
+# My Knot => Codeberg
+# Codeberg => Nuvieknot
+forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@codeberg.org:strawmelonjuice/Lumina-mirror.git
+git@codeberg.org:strawmelonjuice/Lumina-mirror.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina-mirror.git
 
-# From my personal forge to Codeberg: SweetnHouse
-git@forge.strawmelonjuice.com:strawmelonjuice/SweetnHouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
-
-# From my personal forge to Codeberg: Chilp
-git@forge.strawmelonjuice.com:strawmelonjuice/chilp.git,git@codeberg.org/strawmelonjuice/chilp_backup.git
-
-# From my personal forge to my Tangled knot: Lumina
-git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@code.strawmelonjuice.com:strawmelonjuice.com/Lumina
-
-# From my personal forge to Codeberg: Lumina
-git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@codeberg.org:strawmelonjuice/Lumina.git
-
-## From Codeberg to Tangled (Nuv's knot): Lumina
-git@codeberg.org:strawmelonjuice/Lumina.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina-mirror
-
-
-## From my personal forge to GitHub: Lumina
-git@forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@github.com:strawmelonjuice/lumina.git
-
-## From my personal forge to Codeberg: Strawmediajuice
+# Strawmelonforge => Codeberg: Strawmediajuice
 git@forge.strawmelonjuice.com:strawmelonjuice/strawmediajuice.git,git@codeberg.org:strawmelonjuice/strawmediajuice.git
 
-## From my personal forge to Codeberg: Strawmelonservices (this repo.)
+# Strawmelonservices (this repo.)
+# Strawmelonforge => Codeberg 
+#                 => GitHub 
 git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@codeberg.org:strawmelonjuice/docker.git
-
-## From my personal forge to GitHub: Strawmelonservices (this repo.)
 git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@github.com:strawmelonjuice/docker.git
 
 ## From my personal forge to Codeberg: dotfiles and nixfiles
+# Nixfiles
+# Strawmelonforge => Codeberg 
+#                 => GitHub 
 git@forge.strawmelonjuice.com:strawmelonjuice/nix.git,git@codeberg.org:strawmelonjuice/nix.git
-git@forge.strawmelonjuice.com:strawmelonjuice/dotfiles.git,git@codeberg.org:strawmelonjuice/dotfiles.git
-
-## From my personal forge to GitHub: dotfiles and nixfiles
 git@forge.strawmelonjuice.com:strawmelonjuice/nix.git,git@github.com:strawmelonjuice/nix.git
-git@forge.strawmelonjuice.com:strawmelonjuice/dotfiles.git,git@github.com:strawmelonjuice/dotfiles.git
 
-## From my personal forge to GitHub: ranger among critters
-git@forge.strawmelonjuice.com:strawmelonjuice/ranger-among-critters.git,git@github.com:strawmelonjuice/ranger-among-critters.git
