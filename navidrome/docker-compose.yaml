@@ -1,0 +1,16 @@
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+    restart: unless-stopped
+    user: 1000:1000 # should be owner of volumes
+    # ports:
+      # - "4533:4533"
+    volumes:
+      - ../data/navidrome:/data
+      - /home/mar/Music:/music:ro
+    networks:
+      - caddys
+networks:
+    caddys:
+        external: true

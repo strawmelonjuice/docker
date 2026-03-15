@@ -2,7 +2,6 @@
 	email webmaster@strawmelonjuice.com
 }
 
-
 # redirect icons to strawmediajuice
 (icon_redirect) {
 	redir /assets/site_icon.png https://strawmelonjuice.com/strawmelonjuice.png permanent
@@ -14,14 +13,12 @@
 	redir /assets/img/logo.svg https://strawmelonjuice.com/strawmelonjuice.png permanent
 }
 
-
 knot.strawmelonjuice.com {
 	reverse_proxy tangled:5555
 }
 
-# redirect from git -> forge
-git.strawmelonjuice.com {
-	redir https://forge.strawmelonjuice.com{uri} permanent
+music.strawmelonjuice.com {
+	reverse_proxy navidrome:4533
 }
 
 forge.strawmelonjuice.com {
