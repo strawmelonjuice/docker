@@ -21,6 +21,10 @@ music.strawmelonjuice.com {
 	reverse_proxy navidrome:4533
 }
 
+git.strawmelonjuice.com {
+	redir https://forge.strawmelonjuice.com{uri}
+}
+
 forge.strawmelonjuice.com {
 	import icon_redirect
 
@@ -28,6 +32,10 @@ forge.strawmelonjuice.com {
 	reverse_proxy anubis-forge:3000 {
 		header_up X-Real-Ip {remote_host}
 	}
+}
+
+files-shared.strawmelonjuice.com {
+	redir https://media.strawmelonjuice.com{uri}
 }
 
 media.strawmelonjuice.com {
