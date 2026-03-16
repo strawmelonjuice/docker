@@ -1,5 +1,6 @@
 **/data/
 **/.env
+navidrome/navidrome.env
 strawmelonjuice-site/
 .vscode/
 .idea/
