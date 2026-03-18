@@ -46,6 +46,7 @@ media.strawmelonjuice.com {
 	reverse_proxy strawmedia:3022
 }
 
+www.strawmelonjuice.com,
 strawmelonjuice.com {
 	# ===================------ ATPROTO ------===================
 	handle_path /.well-known/atproto-did {
