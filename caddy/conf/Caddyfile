@@ -48,6 +48,12 @@ media.strawmelonjuice.com {
 
 www.strawmelonjuice.com,
 strawmelonjuice.com {
+	# Old strawmelonjuice.php and Cynthia Full pages that google is still trying and its annoying me.
+	@old_php_pages query p=*
+
+	handle @old_php_pages {
+		respond "This content is no longer available." 410
+	}
 	# ===================------ ATPROTO ------===================
 	handle_path /.well-known/atproto-did {
 		respond "did:plc:jgtfsmv25thfs4zmydtbccnn"
