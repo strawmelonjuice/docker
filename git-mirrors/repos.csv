@@ -1,28 +1,30 @@
 # Source,Target
 
-# My Knot => Codeberg: SweetnHouse
-knot.strawmelonjuice.com:strawmelonjuice.com/sweetnhouse.git,git@codeberg.org:strawmelonjuice/SweetnHouse.git
+# Nuvieknot => Codeberg: SweetnHouse
+knot.nuv.sh:strawmelonjuice.com/sweetnhouse,codeberg.org:strawmelonjuice/SweetnHouse-mirror
 
 # Lumina is already mirrored through Forgejo-builtin-mirroring on the strawmelonjuice.
 # Defined here:
-# My Knot => Codeberg
+# My Knot => My Forge
+# My Forge => Codeberg
 # Codeberg => Nuvieknot
-forge.strawmelonjuice.com:strawmelonjuice/Lumina.git,git@codeberg.org:strawmelonjuice/Lumina-mirror.git
-git@codeberg.org:strawmelonjuice/Lumina-mirror.git,git@knot.nuv.sh:strawmelonjuice.com/Lumina-mirror.git
+knot.strawmelonjuice.com:strawmelonjuice.com/Lumina,forge.strawmelonjuice.com:strawmelonjuice/Lumina-mirror.git
+forge.strawmelonjuice.com:strawmelonjuice/Lumina-mirror.git,codeberg.org:strawmelonjuice/Lumina-mirror.git
+codeberg.org:strawmelonjuice/Lumina-mirror.git,knot.nuv.sh:strawmelonjuice.com/Lumina-mirror
 
 # Strawmelonforge => Codeberg: Strawmediajuice
-git@forge.strawmelonjuice.com:strawmelonjuice/strawmediajuice.git,git@codeberg.org:strawmelonjuice/strawmediajuice.git
+forge.strawmelonjuice.com:strawmelonjuice/strawmediajuice.git,codeberg.org:strawmelonjuice/strawmediajuice.git
 
 # Strawmelonservices (this repo.)
 # Strawmelonforge => Codeberg 
 #                 => GitHub 
-git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@codeberg.org:strawmelonjuice/docker.git
-git@forge.strawmelonjuice.com:strawmelonjuice/docker.git,git@github.com:strawmelonjuice/docker.git
+forge.strawmelonjuice.com:strawmelonjuice/docker.git,codeberg.org:strawmelonjuice/docker.git
+forge.strawmelonjuice.com:strawmelonjuice/docker.git,github.com:strawmelonjuice/docker.git
 
 ## From my personal forge to Codeberg: dotfiles and nixfiles
 # Nixfiles
 # Strawmelonforge => Codeberg 
 #                 => GitHub 
-git@forge.strawmelonjuice.com:strawmelonjuice/nix.git,git@codeberg.org:strawmelonjuice/nix.git
-git@forge.strawmelonjuice.com:strawmelonjuice/nix.git,git@github.com:strawmelonjuice/nix.git
+forge.strawmelonjuice.com:strawmelonjuice/nix.git,codeberg.org:strawmelonjuice/nix.git
+forge.strawmelonjuice.com:strawmelonjuice/nix.git,github.com:strawmelonjuice/nix.git
 
