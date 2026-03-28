@@ -86,7 +86,7 @@ strawmelonjuice.com {
 	# ===================------ My Site ------===================
 	handle {
 		root * /srv/strawmelonjuice-site/
-		try_files {path} {path}/index.html /index.html
+		try_files {path} {path}/index.html /unpopulated.html
 		file_server
 	}
 }
