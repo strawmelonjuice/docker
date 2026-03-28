@@ -8,7 +8,7 @@ services:
         # image: tngl/knot:v1.10.0-alpha
         build:
             context: ./knot-docker/
-            args: { TAG: "v1.11.0-alpha" }
+            args: { TAG: "master" }
         container_name: tangled
         environment:
             KNOT_SERVER_HOSTNAME: knot.strawmelonjuice.com
